@@ -68,17 +68,17 @@ function Main() {
                     textAlign: 'center',
                     marginTop: '8vh'
                 }}>
-                    <Col><img src="./잠실.png" style={{ width: '230px', height: '' }} /></Col>
-                    <Col><img src="./창원.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./제주.png" style={{ width: '230px' }} /></Col>
+                    <Col><img src="./jamsil1.png" style={{ width: '230px', height: '' }} /></Col>
+                    <Col><img src="./chanwon.png" style={{ width: '230px' }} /></Col>
+                    <Col><img src="./jeju.png" style={{ width: '230px' }} /></Col>
                 </Row>
                 <Row style={{
                     textAlign: 'center',
                     marginTop: '8vh'
                 }}>
-                    <Col><img src="./인천.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./하남.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./안양.png" style={{ width: '230px' }} /></Col>
+                    <Col><img src="./incheon.png" style={{ width: '230px' }} /></Col>
+                    <Col><img src="./hanam.png" style={{ width: '230px' }} /></Col>
+                    <Col><img src="./anyang.png" style={{ width: '230px' }} /></Col>
                 </Row>
                 <Row style={{
                     marginTop: '20vh'
@@ -107,7 +107,7 @@ function Main() {
                         <div>EVERY INFORMATION YOU NEED TO WORKOUT</div>
                         <Btn style={{ border: '1px solid #C4C4C4', backgroundColor: 'white' }}>DETAIL</Btn>
                     </Col>
-                    <Col sm={8}><img src="./헬린이.jpg" style={{ width: '500px' }} /></Col>
+                    <Col sm={8}><img src="./me.jpg" style={{ width: '500px' }} /></Col>
                 </Row>
             </Container>
             <Footer />
