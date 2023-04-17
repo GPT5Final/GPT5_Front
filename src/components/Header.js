@@ -6,47 +6,49 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header() {
-    return (
-        <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand >
-                    <Link to='/'><img 
-                        src="./gpt_logo.png"
-                        style={{
-                            width: '13vw'
-                        }}
-                    ></img></Link>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto" style={{ marginLeft: '9vw'}}>
-                        <Nav.Link href="#home" style={{ marginLeft: '2vw'}}>
-                            <Link style={{ textDecoration: 'none', color: '#505050'}} to="/gyms">GYMS</Link></Nav.Link>
-                        <Nav.Link href="#link" style={{ marginLeft: '2vw'}} >
-                            <Link style={{ textDecoration: 'none', color: '#505050'}} to="/charge">CHARGE</Link></Nav.Link>
-                        <Nav.Link href="#link" style={{ marginLeft: '2vw'}}>
-                            <Link style={{ textDecoration: 'none', color: '#505050'}} to="/makeGroup">MAKEGROUP</Link></Nav.Link>
-                        <Nav.Link href="#link" style={{ marginLeft: '2vw'}}>
-                            <Link style={{ textDecoration: 'none', color: '#505050'}} to="/stretching">STRETCHING</Link>
-                        </Nav.Link>
-                    </Nav>
-                    <div
-                        style={{
-                            display: 'flex',
-                            width: '100%',
-                            justifyContent: 'space-between',
-                            marginBottom: '10vh',
-                            fontSize: '15px'
-                        }}
-                    >
-                        <div>coin:2000pt</div>
-                        <div>MYPAGE</div>
-                        <div>LOGOUT</div>
-                    </div>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    )
+  return (
+    <Navbar bg="light" expand="lg" style={{ padding: '0.5rem 1rem' }}>
+      <Container>
+        <Navbar.Brand>
+          <Link to="/">
+            <img
+              src="./gpt_logo.png"
+              style={{
+                width: '6vw',
+                marginRight: '1rem',
+              }}
+              alt="GPT Logo"
+            />
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mx-auto">
+            <Nav.Link as={Link} to="/gyms" className="nav-link" style={{ marginLeft: '5vw' }}>
+              GYMS
+            </Nav.Link>
+            <Nav.Link as={Link} to="/charge" className="nav-link" style={{ marginLeft: '5vw' }}>
+              CHARGE
+            </Nav.Link>
+            <Nav.Link as={Link} to="/makeGroup" className="nav-link" style={{ marginLeft: '5vw' }}>
+              MAKEGROUP
+            </Nav.Link>
+            <Nav.Link as={Link} to="/stretching" className="nav-link" style={{ marginLeft: '5vw' }}>
+              STRETCHING
+            </Nav.Link>
+          </Nav>
+          <Nav className="ms-auto" style={{ marginTop: '-6rem' }}>
+            <Nav.Link as={Link} to="/mypage" className="nav-link" style={{ fontSize: '0.9rem' }}>
+              MYPAGE
+            </Nav.Link>
+            <Nav.Link as={Link} to="/login" className="nav-link" style={{ fontSize: '0.9rem' }}>
+              LOGIN
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 }
 
-export default Header
+export default Header;

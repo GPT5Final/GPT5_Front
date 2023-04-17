@@ -11,7 +11,7 @@ import Charge from './pages/Charge';
 function App() {
   return (
     <>
-      <Gyms />
+      <Main />
     </>
   );
 }
