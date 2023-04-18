@@ -10,11 +10,16 @@ import Stretching from "./pages/Stretching";
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Mypage from './pages/Mypage';
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
+    },
+    {
+        path: "/mypage",
+        element: <Mypage />,
     },
     {
         path: "/login",
