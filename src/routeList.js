@@ -8,12 +8,16 @@ import Stretching from "./pages/Stretching";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Information from "./pages/Information";
+import Mypage from "./pages/Mypage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+  },
+  {
+    path: "/mypage",
+    element: <Mypage />,
   },
   {
     path: "/login",
@@ -26,10 +30,6 @@ const router = createBrowserRouter([
   {
     path: "/gyms",
     element: <Gyms />,
-  },
-  {
-    path: "/information",
-    element: <Information />,
   },
   {
     path: "/charge",
