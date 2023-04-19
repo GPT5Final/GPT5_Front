@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import App from "./App";
 import Charge from "./pages/Charge";
 import Gyms from "./pages/Gyms";
 import MakeGroup from "./pages/MakeGroup";
@@ -9,6 +8,8 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Mypage from "./pages/Mypage";
+import Information from "./pages/Information";
+import Inquriy from "./pages/Inquriy";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
   {
     path: "/gyms",
     element: <Gyms />,
+  },
+  {
+    path: "/information",
+    element: <Information />,
+  },
+  {
+    path: "/inquriy",
+    element: <Inquriy />,
   },
   {
     path: "/charge",
