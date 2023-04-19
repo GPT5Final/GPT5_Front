@@ -1,23 +1,22 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Footer } from "./components/Footer";
+import { Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
-import Gyms from "./pages/Gyms";
-import Stretching from "./pages/Stretching";
-import MakeGroup from "./pages/MakeGroup";
-import Charge from "./pages/Charge";
 
 function App() {
   return (
-    <>
-      <Main />
-    </>
+    <div className="App">
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
 export default App;
-
-{
-  /* <img src="./gpt_logo.png" ></img> */
-}

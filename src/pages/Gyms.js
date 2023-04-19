@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
+
 const Btn = styled.button`
     border-top-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -39,6 +40,7 @@ const Gyms = () => {
                             className="d-block w-100"
                             src="./figure.unit-image.png"
                             alt="First slide"
+                            style={{ width: '300px', height: '400px' }}
                         />
                         <Carousel.Caption>
                             {/* <h3>First slide label</h3>
@@ -50,6 +52,7 @@ const Gyms = () => {
                             className="d-block w-100"
                             src="./figure.unit-image.png"
                             alt="Second slide"
+                            style={{ width: '300px', height: '400px' }}
                         />
 
                         <Carousel.Caption>
@@ -62,6 +65,7 @@ const Gyms = () => {
                             className="d-block w-100"
                             src="./figure.unit-image.png"
                             alt="Third slide"
+                            style={{ width: '300px', height: '400px' }}
                         />
 
                         <Carousel.Caption>

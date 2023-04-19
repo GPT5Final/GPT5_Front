@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -23,7 +22,8 @@ function Register() {
 
   let history = useNavigate();
 
-  function account(){
+  function account(e){
+    e.preventDefault();
     let member = { "email":email, "pwd":pwd, "nickname":nickname, "gender":gender, "name":name, "contact":contact, "birth":birth};
     axios.post("http://localhost:3000/addmember", null, { params:member })
     .then(function(resp){
@@ -68,12 +68,15 @@ function Register() {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>성별</Form.Label>
-                <Form.Select onChange={(e)=>setGender(e.target.value)}>
-                  <option value="" disabled selected>성별을 선택하세요</option>
+                <Form.Select value={gender} onChange={(e) => setGender(e.target.value)}>
+                  <option value="" disabled>
+                    성별을 선택하세요
+                  </option>
                   <option value="M">남성</option>
                   <option value="F">여성</option>
                 </Form.Select>
               </Form.Group>
+
               <Form.Group className="mb-3">
                 <Form.Label>생년월일</Form.Label>
                 <Form.Control onChange={(e)=>setBirth(e.target.value)} type="date" />
@@ -82,7 +85,7 @@ function Register() {
                 <Form.Label>연락처</Form.Label>
                 <Form.Control onChange={(e)=>setContact(e.target.value)} type="tel" placeholder="전화번호를 입력하세요" />
               </Form.Group>
-              <Button variant="primary" type="submit" className="w-100 mt-3" onClick={account}>
+              <Button variant="primary" type="button" className="w-100 mt-3" onClick={account}>
                 회원가입
               </Button>
             </Form>
