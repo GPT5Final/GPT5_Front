@@ -27,6 +27,8 @@ const Router = () => {
         <Route path="/charge" element={<Charge />} />
         <Route path="/makeGroup" element={<MakeGroup />} />
         <Route path="/stretching" element={<Stretching />} />
+        <Route path="/information" element={<Information />} />
+        <Route path="/inquriy" element={<Inquriy />} />
       </Routes>
     </BrowserRouter>
   );
