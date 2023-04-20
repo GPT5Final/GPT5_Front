@@ -11,6 +11,9 @@ import Login from "./pages/Login";
 import Logout from './pages/Logout';
 import Register from "./pages/Register";
 import Mypage from "./pages/Mypage";
+import Trainers from './pages/Trainers';
+import TrainersUpload from "./pages/TrainersUpload";
+import TrainersDetail from "./pages/TrainersDetail";
 
 const Router = () => {
   return (
@@ -26,6 +29,10 @@ const Router = () => {
           <Route path="/charge" element={<Charge />} />
           <Route path="/makeGroup" element={<MakeGroup />} />
           <Route path="/stretching" element={<Stretching />} />
+          <Route path="/trainers" element={<Trainers />} />
+          <Route path="/trainersupload" element={<TrainersUpload />} />
+          <Route path="/trainersdetail" element={<TrainersDetail />} />
+          
         </Routes>    
     </BrowserRouter>
   );
