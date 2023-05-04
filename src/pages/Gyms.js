@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled  from 'styled-components';
 import { Footer } from '../components/Footer';
 import Header from '../components/Header';
@@ -25,9 +26,13 @@ const Btn = styled.button`
 const Gyms = () => {
 
     const [index, setIndex] = useState(0);
-
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
+    };
+
+    const history = useNavigate();
+    const MoreClick = () => {
+        history('/trainers');
     };
 
     return (
@@ -137,7 +142,7 @@ const Gyms = () => {
                         <div>수상 : 김계란리프팅대회 우승</div>
                         <br></br>
                         <br></br>
-                        <Btn >MORE</Btn>
+                        <Btn onClick={MoreClick}>MORE</Btn>
                     </Col>
                 </Row>
             </Container>
