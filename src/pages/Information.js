@@ -35,11 +35,11 @@ function Information() {
             <Nav.Link as={Link} to="/charge">
               charge
             </Nav.Link>
-            <Nav.Link as={Link} to="/inquriy">
-              inquriy
+            <Nav.Link as={Link} to="/payBbs">
+              payBbs
             </Nav.Link>
-            <Nav.Link as={Link} to="/charge">
-              charge
+            <Nav.Link as={Link} to="/payCoin">
+              payCoin
             </Nav.Link>
           </Nav>
         </Container>

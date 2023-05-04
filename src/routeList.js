@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Charge from "./pages/Charge";
 import Gyms from "./pages/gyms/Gyms";
 import MakeGroup from "./pages/MakeGroup";
 import Stretching from "./pages/Stretching";
@@ -11,7 +10,9 @@ import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Mypage from "./pages/Mypage";
 import Information from "./pages/Information";
-import Inquriy from "./pages/Inquriy";
+import PayBbs from "./pages/pay/payBbs";
+import Charge from "./pages/pay/Charge";
+import PayCoin from "./pages/pay/payCoin";
 import Trainers from './pages/gyms/Trainers';
 import TrainersUpload from "./pages/gyms/TrainersUpload";
 import TrainersDetail from "./pages/gyms/TrainersDetail";
@@ -27,14 +28,15 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/gyms" element={<Gyms />} />
-        <Route path="/charge" element={<Charge />} />
+        <Route path="/charge" element={<Charge />} />        
         <Route path="/makeGroup" element={<MakeGroup />} />
         <Route path="/stretching" element={<Stretching />} />
         <Route path="/information" element={<Information />} />
-        <Route path="/inquriy" element={<Inquriy />} />
-          <Route path="/trainers" element={<Trainers />} />
-          <Route path="/trainersupload" element={<TrainersUpload />} />
-          <Route path="/trainer/:id" element={<TrainersDetail />} />
+        <Route path="/payBbs" element={<PayBbs />} />
+        <Route path="/payCoin" element={<PayCoin />} />        
+        <Route path="/trainers" element={<Trainers />} />
+        <Route path="/trainersupload" element={<TrainersUpload />} />
+        <Route path="/trainer/:id" element={<TrainersDetail />} />
           
       </Routes>
     </BrowserRouter>
