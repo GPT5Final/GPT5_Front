@@ -2,8 +2,13 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Gyms from "./pages/gyms/Gyms";
-import MakeGroup from "./pages/MakeGroup";
 import Stretching from "./pages/Stretching";
+import Home from "./pages/community/Home";
+import MyGroup from "./pages/community/MyGroup";
+import PartnerMentor from "./pages/community/PartnerMentor";
+import MentorMentee from "./pages/community/MentorMentee";
+import ExerciseTalk from "./pages/community/ExerciseTalk";
+import MakeGroup from "./pages/community/MakeGroup";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -29,7 +34,12 @@ const Router = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/gyms" element={<Gyms />} />
         <Route path="/charge" element={<Charge />} />        
-        <Route path="/makeGroup" element={<MakeGroup />} />
+        <Route path="/community/Home" element={<Home />} />
+        <Route path="/community/MyGroup" element={<MyGroup />} />
+        <Route path="/community/PartnerMentor" element={<PartnerMentor />} />
+        <Route path="/community/MentorMentee" element={<MentorMentee />} />
+        <Route path="/community/ExerciseTalk" element={<ExerciseTalk />} />
+        <Route path="/community/MakeGroup" element={<MakeGroup />} />
         <Route path="/stretching" element={<Stretching />} />
         <Route path="/information" element={<Information />} />
         <Route path="/payBbs" element={<PayBbs />} />

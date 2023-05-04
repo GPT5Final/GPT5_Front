@@ -53,7 +53,7 @@ function Header() {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/makeGroup"
+              to="/community/Home"
               className="nav-link"
               style={{ marginLeft: "5vw" }}
             >
