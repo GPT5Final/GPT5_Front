@@ -2,14 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const TrainersDetail = ({ isAdmin }) => {
+const TrainersDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [trainer, setTrainer] = useState(null);
+  const [userAuth, setUserAuth] = useState(null);
+
+  useEffect(() => {
+    const logInUser = JSON.parse(localStorage.getItem("login"));
+    if (logInUser && logInUser.nickname) {
+      setUserAuth(logInUser.auth);
+    }
+  }, []);
 
   const fetchTrainer = async () => {
     try {
-      const response = await axios.get(`/api/trainers/${id}`);
+      const response = await axios.get(`http://localhost:3000/getTrainer?seq=${id}`);
       setTrainer(response.data);
     } catch (error) {
       console.error(error);
@@ -26,7 +34,8 @@ const TrainersDetail = ({ isAdmin }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/trainers/${id}`);
+      await axios.post(`http://localhost:3000/trainerdelete?seq=${id}`);
+      alert("삭제완료");
       navigate('/trainers');
     } catch (error) {
       console.error(error);
@@ -39,11 +48,11 @@ const TrainersDetail = ({ isAdmin }) => {
 
   return (
     <div>
-      <img src={trainer.image} alt={trainer.name} />
-      <div>이름: {trainer.name}</div>
-      <div>경력: {trainer.experience}</div>
-
-      {isAdmin && (
+      <img src={`http://localhost:3000/static/images/${trainer.newfilename}`} alt={trainer.nickname} />
+      <div>이름: {trainer.nickname}</div>
+      <div>제목: {trainer.title}</div>
+  
+      {userAuth === 0 && (
         <>
           <button onClick={handleUpdate}>수정</button>
           <button onClick={handleDelete}>삭제</button>

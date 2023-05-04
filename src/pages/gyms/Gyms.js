@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled  from 'styled-components';
-import { Footer } from '../components/Footer';
-import Header from '../components/Header';
+import { Footer } from '../../components/Footer';
+import Header from '../../components/Header';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -45,7 +45,7 @@ const Gyms = () => {
                             className="d-block w-100"
                             src="./figure.unit-image.png"
                             alt="First slide"
-                            style={{ width: '300px', height: '400px' }}
+                            style={{ width: '500px', height: '400px' }}
                         />
                         <Carousel.Caption>
                             {/* <h3>First slide label</h3>
@@ -57,7 +57,7 @@ const Gyms = () => {
                             className="d-block w-100"
                             src="./figure.unit-image.png"
                             alt="Second slide"
-                            style={{ width: '300px', height: '400px' }}
+                            style={{ width: '500px', height: '400px' }}
                         />
 
                         <Carousel.Caption>
@@ -70,7 +70,7 @@ const Gyms = () => {
                             className="d-block w-100"
                             src="./figure.unit-image.png"
                             alt="Third slide"
-                            style={{ width: '300px', height: '400px' }}
+                            style={{ width: '500px', height: '400px' }}
                         />
 
                         <Carousel.Caption>

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Charge from "./pages/Charge";
-import Gyms from "./pages/Gyms";
+import Gyms from "./pages/gyms/Gyms";
 import MakeGroup from "./pages/MakeGroup";
 import Stretching from "./pages/Stretching";
 import Main from "./pages/Main";
@@ -12,9 +12,9 @@ import Register from "./pages/Register";
 import Mypage from "./pages/Mypage";
 import Information from "./pages/Information";
 import Inquriy from "./pages/Inquriy";
-import Trainers from './pages/Trainers';
-import TrainersUpload from "./pages/TrainersUpload";
-import TrainersDetail from "./pages/TrainersDetail";
+import Trainers from './pages/gyms/Trainers';
+import TrainersUpload from "./pages/gyms/TrainersUpload";
+import TrainersDetail from "./pages/gyms/TrainersDetail";
 
 const Router = () => {
   return (
@@ -34,7 +34,7 @@ const Router = () => {
         <Route path="/inquriy" element={<Inquriy />} />
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/trainersupload" element={<TrainersUpload />} />
-          <Route path="/trainersdetail" element={<TrainersDetail />} />
+          <Route path="/trainer/:id" element={<TrainersDetail />} />
           
       </Routes>
     </BrowserRouter>
