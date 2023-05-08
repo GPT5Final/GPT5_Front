@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header";
 
 function PayBbs() {
   const [paymentlist, setPaymentlist] = useState([]);
   const [nickname, setNickname] = useState("");
+
+  let history = useNavigate();
 
   const fetchData = async () => {
     await axios
@@ -23,15 +25,16 @@ function PayBbs() {
 
   useEffect(
     () => {
+
       const user = JSON.parse(localStorage.getItem("login"));
 
-      if (user !== undefined) {
+      if (user !== undefined && user !== null) {
         console.log(user.nickname);
         setNickname(user.nickname);
         fetchData();
       } else {
         alert("로그인 해주십시오.");
-        <Link to={"/login"} />;
+        history("/login");
       }
     },
     [],
