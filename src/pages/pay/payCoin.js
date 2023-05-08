@@ -60,7 +60,7 @@ function PayCoin() {
     () => {
       const user = JSON.parse(localStorage.getItem("login"));
 
-      if (user !== undefined) {
+      if (user !== undefined && user !== null) {
         setCoin(user.coin);
         setAfterCoin(user.coin);
         setBuyer(user.nickname);
