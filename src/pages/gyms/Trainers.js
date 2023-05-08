@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Footer } from '../../components/Footer';
 import Header from '../../components/Header';
-import axiosInstance from '../../axiosInstance'; // 경로는 실제 파일 위치에 맞게
+import axiosInstance from '../../axiosInstance';
 
 
 const TrainerList = styled.div`
@@ -36,8 +36,26 @@ const TrainerImage = styled.img`
 const TrainerContent = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
   pointer-events: auto;
 `;
+
+const LikeWrapper = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+`;
+const LikeButton = styled.button`
+  align-self: flex-end;
+  pointer-events: auto;
+`;
+
+const LikeCount = styled.span`
+  align-self: flex-end;
+`;
+
 
 const Trainers = () => {
   const [logIn, setLogIn] = useState(false);
@@ -94,7 +112,7 @@ const Trainers = () => {
       formData.append("nickname", nickname);
       formData.append("isLiked", !isLiked);
   
-      const response = await axios.post("http://localhost:3000/toggleLike", formData);
+      const response = await axiosInstance.post("/toggleLike", formData);
   
       if (response.status === 200) {
         const { success, updatedLikes } = response.data;
@@ -134,27 +152,21 @@ const Trainers = () => {
         {/* 트레이너 정보 출력 */}
         {trainers.length > 0 ? (
           trainers.map((trainer) => (
-            <TrainerItem key={trainer.seq} onClick={() => handleTrainerClick(trainer.seq)}>           
-            {/* <TrainerImage src={`http://localhost:3000/resources/static/images/${trainer.newfilename}`} alt={trainer.nickname} /> */}
-            {/* <TrainerImage src={`/resources/static/images/${trainer.newfilename}`} alt={trainer.nickname} /> */}
-            {/* <TrainerImage src={`/resources/${trainer.newfilename}`} alt={trainer.nickname} /> */}
-            {/* <TrainerImage src={`http://localhost:3000/${trainer.newfilename}`} alt={trainer.nickname} /> */}
-            {/* <TrainerImage src={`${trainer.newfilename}`} alt={trainer.nickname} /> */}
-            <TrainerImage src={`http://localhost:3000/static/images/${trainer.newfilename}`} alt={trainer.nickname} />
-            {/* <TrainerImage src={`/images/${trainer.newfilename}`} alt={trainer.nickname} /> */}
-            
-              <TrainerContent>
-                <div>이름: {trainer.nickname}</div>
-                <div>제목: {trainer.title}</div>
-                <button
-                  style={{ pointerEvents: 'auto' }}
-                  onClick={(e) => {
-                    handleLikeButtonClick(e, trainer.seq, trainer.isLiked);
-                  }}
-                >
-                  {trainer.isLiked ? "💔 좋아요 취소" : "❤️ 좋아요"}
-                </button>
-                <span>{trainer.love}개</span>
+            <TrainerItem key={trainer.seq} onClick={() => handleTrainerClick(trainer.seq)}>          
+              <TrainerImage src={`http://localhost:3000/static/images/${trainer.newfilename}`} alt={trainer.nickname} />                          
+                <TrainerContent>
+                  <div>이름: {trainer.nickname}</div>
+                  <div>제목: {trainer.title}</div>
+                  <LikeWrapper>
+                    <LikeButton
+                      onClick={(e) => {
+                        handleLikeButtonClick(e, trainer.seq, trainer.isLiked);
+                      }}
+                    >
+                      {trainer.isLiked ? "💔 좋아요 취소" : "❤️ 좋아요"}
+                    </LikeButton>
+                    <LikeCount>{trainer.love}개</LikeCount>
+                  </LikeWrapper>
               </TrainerContent>
             </TrainerItem>
           ))

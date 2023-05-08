@@ -129,7 +129,7 @@ const Gyms = () => {
             <Container style={{ marginTop: '10vh'}}>
                 <Row>
                     <Col sm={8} style={{ textAlign: 'center'}}>
-                        <img src="./fighter.jpg" style={{ width: '30vw'}}/>
+                        <img src="http://localhost:3000/static/images/d21a4934_Nic.jpeg" style={{ width: '30vw'}}/>
                     </Col>
                     <Col sm={4}>
                         <h1>TRAINER</h1>

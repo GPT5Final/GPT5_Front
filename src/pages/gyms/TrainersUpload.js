@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from '../../components/Footer';
 import Header from '../../components/Header';
-import './TrainersUpload.css';
+import styles from './TrainersUpload.module.css';
 
 const TrainersUpload = () => {
   const [title, setTitle] = useState('');
@@ -50,35 +50,35 @@ const TrainersUpload = () => {
 
   return (
     <>
-      <Header /> {/* nickname을 props로 전달 */}
-      <div className="upload-container">
-        <form onSubmit={handleSubmit} className="upload-form">
-          <label>제목</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="upload-input"
-          />
-          <label>내용</label>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="upload-textarea"
-          />
-          <label>이미지 업로드</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFile(e.target.files[0])}
-            className="upload-file"
-          />
-          <button type="submit" className="upload-submit">글 작성</button>
-        </form>
-      </div>
-      <Footer />
-    </>
-  );
-};
+    <Header />
+    <div className={styles['upload-container']}>
+      <form onSubmit={handleSubmit} className={styles['upload-form']}>
+        <label className={styles['upload-label']}>제목</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className={styles['upload-input']}
+        />
+        <label className={styles['upload-label']}>내용</label>
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className={styles['upload-textarea']}
+        />
+        <label className={styles['upload-label']}>이미지 업로드</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setFile(e.target.files[0])}
+          className={styles['upload-file']}
+        />
+        <button type="submit" className={styles['upload-submit']}>글 작성</button>
+      </form>
+    </div>
+    <Footer />
+  </>
+);
+}
 
 export default TrainersUpload;
