@@ -23,6 +23,7 @@ function PayBbs() {
 
   useEffect(
     () => {
+
       const user = JSON.parse(localStorage.getItem("login"));
 
       if (user !== undefined && user !== null) {
