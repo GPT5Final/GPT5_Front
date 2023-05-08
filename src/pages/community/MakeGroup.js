@@ -79,6 +79,8 @@ const Chat = styled.div`
     border-radius: 50%;
 `;
 
+
+
 function MakeGroup() {
     let history = useNavigate();
 
@@ -344,8 +346,8 @@ function MakeGroup() {
                         </GymInfo>
                         <GymInfoTwo style={{ marginTop: '10px' }}>
                             <div style={{ marginTop: '10px' }}>
-                                <div><input value={title} placeholder="제목" type="text" onChange={(e) => setTitle(e.target.value)} /></div>
-                                <input value={content} placeholder="내용" type="text" onChange={(e) => setContent(e.target.value)} style={{ marginTop: '15px', marginLeft: '20px', height: '250px', width: '720px' }} />
+                                <textarea value={title} placeholder="제목" type="text" onChange={(e) => setTitle(e.target.value)} style={{ marginLeft: '20px', height: '30px', width: '720px' }} />
+                                <textarea value={content} placeholder="내용" type="text" onChange={(e) => setContent(e.target.value)} style={{ marginTop: '15px', marginLeft: '20px', height: '250px', width: '720px' }} />
                             </div>
                             {/* <DraftEditor /> */}
                             <div style={{ display: 'flex', marginTop: '30px', marginLeft: '100px' }}>
