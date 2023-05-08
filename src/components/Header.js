@@ -63,11 +63,11 @@ function Header() {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/stretching"
+              to="/guide"
               className="nav-link"
               style={{ marginLeft: "5vw" }}
             >
-              STRETCHING
+              GUIDE
             </Nav.Link>
           </Nav>
           <Nav className="ms-auto" style={{ marginTop: "-6rem" }}>

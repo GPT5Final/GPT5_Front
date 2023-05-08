@@ -14,6 +14,9 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Mypage from "./pages/Mypage";
+import Guide from "./pages/Guide";
+import Diet from "./pages/Diet";
+import Exercise from "./pages/Exercise";
 import Information from "./pages/Information";
 import PayBbs from "./pages/pay/payBbs";
 import Charge from "./pages/pay/Charge";
@@ -24,6 +27,7 @@ import TrainersDetail from "./pages/gyms/TrainersDetail";
 
 const Router = () => {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} exact />
@@ -47,7 +51,10 @@ const Router = () => {
         <Route path="/trainers" element={<Trainers />} />
         <Route path="/trainersupload" element={<TrainersUpload />} />
         <Route path="/trainer/:id" element={<TrainersDetail />} />
-          
+        <Route path="/guide" element={<Guide />} />
+        <Route path="/exercise" element={<Exercise />} />
+        <Route path="/diet" element={<Diet />} />
+        <Route path="/stretching" element={<Stretching />} />          
       </Routes>
     </BrowserRouter>
   );
