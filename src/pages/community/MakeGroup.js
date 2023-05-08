@@ -9,8 +9,10 @@ import Header from "../../components/Header";
 import { Footer } from '../../components/Footer';
 import CommunityMenu from '../../components/CommunityMenu';
 import CommunityBanner from '../../components/CommunityBanner';
-import DraftEditor from './DraftEditor';
-import { Map } from 'react-kakao-maps-sdk'
+// import LandingPage from '../../components/LandingPage';
+import MapContainer from '../../components/MapContainer'
+// import DraftEditor from './DraftEditor';
+// import { Map } from 'react-kakao-maps-sdk'
 
 
 const BtnOne = styled.button`
@@ -82,33 +84,62 @@ function MakeGroup() {
 
     const [email, setEmail] = useState('');
     const [nickname, setNickname] = useState('');
-    const [category, setCategory] = useState('');
-    const [banner, setBanner] = useState('');
+    const [groupname, setGroupname] = useState('');
     const [career, setCareer] = useState('');
-    const [price, setPrice] = useState('');
     const [stime, setStime] = useState('');
     const [etime, setEtime] = useState('');
-    const [tag, setTag] = useState('');
-    const [groupname, setGroupname] = useState('');
+    const [category, setCategory] = useState('');
+    const [banner, setBanner] = useState('');
+    const [price, setPrice] = useState('');
     const [location, setLocation] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [wdate, setWdate] = useState('');
+    const [tag1, setTag1] = useState('');
+    const [tag2, setTag2] = useState('');
+    const [tag3, setTag3] = useState('');
+    const [Place, setPlace] = useState('')
 
 
-    const writeBbs = () => {
-        // if (groupname === undefined || groupname.trim() === '') {
-        //     alert('그룹명을 입력해 주십시오');
-        //     return;
-        // }
-        // if (career === undefined || career.trim() === '') {
-        //     alert('경력을 입력해 주십시오');
-        //     return;
-        // }
-        // if (price === undefined || price.trim() === '') {
-        //     alert('포인트를 입력해 주십시오');
-        //     return;
-        // }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setPlace(location)
+        setLocation('')
+    }
+
+
+    const Communitywrite = () => {
+        if (groupname === undefined || groupname.trim() === '') {
+            alert('그룹명을 입력해 주십시오');
+            return;
+        }
+        if (career === undefined || career.trim() === '') {
+            alert('경력을 입력해 주십시오');
+            return;
+        }
+        if (stime === undefined || stime.trim() === '') {
+            alert('시작 시간을 선택해 주십시오');
+            return;
+        }
+        if (etime === undefined || etime.trim() === '') {
+            alert('종료 시간을 선택해 주십시오');
+            return;
+        }
+        if (category === undefined || category.trim() === '') {
+            alert('카테고리를 선택해 주십시오');
+            return;
+        }
+        if (banner === undefined || banner.trim() === '') {
+            alert('배너광고 유무를 선택해 주십시오');
+            return;
+        }
+        if (price === undefined || price.trim() === '') {
+            alert('신청 포인트를 입력해 주십시오');
+            return;
+        }
+        if (location === undefined || location.trim() === '') {
+            alert('위치를 지정해 주십시오');
+            return;
+        }
         if (title === undefined || title.trim() === '') {
             alert('제목을 입력해 주십시오');
             return;
@@ -117,15 +148,29 @@ function MakeGroup() {
             alert('내용을 입력해 주십시오');
             return;
         }
+        if (tag1 === undefined || tag1.trim() === '') {
+            alert('실력을 선택해 주십시오');
+            return;
+        }
+        if (tag2 === undefined || tag2.trim() === '') {
+            alert('분위기를 선택해 주십시오');
+            return;
+        }
+        if (tag3 === undefined || tag3.trim() === '') {
+            alert('스타일을 선택해 주십시오');
+            return;
+        }
 
 
-        axios.post("http://localhost:3000/bbswrite", null,
-            { params: { "email": email, "nickname": nickname, "category": category, "banner": banner, "career": career, "price": price, "stime": stime, "etime": etime, "tag": tag, "groupname": groupname, "title": title, "content": content } })
+
+
+        axios.post("http://localhost:3000/Communitywrite", null,
+            { params: { "email": email, "nickname": nickname, "groupname": groupname, "career": career, "stime": stime, "etime": etime, "category": category, "banner": banner, "price": price, "location": location, "title": title, "content": content, "tag1": tag1, "tag2": tag2, "tag3": tag3, } })
             .then(res => {
                 console.log(res.data);
                 if (res.data === "YES") {
                     alert("성공적으로 등록되었습니다");
-                    history('/bbslist');
+                    history('/community/Home');
                 } else {
                     alert("등록되지 않았습니다");
                 }
@@ -158,7 +203,7 @@ function MakeGroup() {
                                         <div style={{ marginTop: '20px', marginLeft: '30px' }}>경력 및 수상내역
                                             <input value={career} type="text" onChange={(e) => setCareer(e.target.value)} style={{ width: '320px' }}></input></div>
                                         <div style={{ display: 'flex', marginTop: '20px', marginLeft: '30px' }}>그룹 활동 시간
-                                            <select className="stime" style={{ marginLeft: '35px', marginRight: '10px' }}>
+                                            <select className="stime" onChange={(e) => setStime(e.target.value)} style={{ marginLeft: '35px', marginRight: '10px' }}>
                                                 <option value="">시작</option>
                                                 <option value="00:00">00 : 00</option>
                                                 <option value="00:30">00 : 30</option>
@@ -210,7 +255,7 @@ function MakeGroup() {
                                                 <option value="23:30">23 : 30</option>
                                             </select>
                                             ~
-                                            <select className="etime" style={{ marginLeft: '10px' }}>
+                                            <select className="etime" onChange={(e) => setEtime(e.target.value)} style={{ marginLeft: '10px' }}>
                                                 <option value="">종료</option>
                                                 <option value="00:00">00 : 00</option>
                                                 <option value="00:30">00 : 30</option>
@@ -264,16 +309,17 @@ function MakeGroup() {
                                         </div>
                                         <div style={{ display: 'flex', marginLeft: '30px', marginTop: '15px' }}>
                                             <div>
-                                                <select className="category">
+                                                <select className="category" onChange={(e) => setCategory(e.target.value)}>
                                                     <option value="">카테고리 선택</option>
-                                                    <option value="partner">인증 멘토 찾기</option>
-                                                    <option value="mentor-mentee">멘토&멘티 찾기</option>
-                                                    <option value="mentee-mentee">같이 운동해요</option>
+                                                    <option value="인증멘토">인증 멘토 찾기</option>
+                                                    <option value="멘토&멘티">멘토&멘티 찾기</option>
+                                                    <option value="같이운동해요">같이 운동해요</option>
                                                 </select>
                                             </div>
-                                            <div style={{ display: 'flex', marginLeft: '50px' }}>
-                                                <select className="banner">
-                                                    <option value="">배너 그룹 홍보</option>
+                                            <div style={{ display: 'flex', marginLeft: '44px' }}>
+                                                <select className="banner" onChange={(e) => setBanner(e.target.value)}>
+                                                    <option value="">배너 홍보 유/무</option>
+                                                    <option value="0">이용 안함</option>
                                                     <option value="1000">1일: 1000코인</option>
                                                     <option value="2500">3일: 2500코인</option>
                                                     <option value="5000">7일: 5000코인</option>
@@ -285,23 +331,12 @@ function MakeGroup() {
                                 </div>
                                 <div className="gym-info-one" style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <div className="map" style={{ display: 'flex' }}>
-                                        <div style={{ marginTop: '15px', marginRight: '30px' }}>장소<input value={location} type="text" onChange={(e) => setLocation(e.target.value)} style={{ border: 'solid 1px', marginLeft: '10px', width: '308px' }}></input>
-                                            <br />
-                                            <Map // 지도를 표시할 Container
-                                                center={{
-                                                    // 지도의 중심좌표
-                                                    lat: 33.450701,
-                                                    lng: 126.570667,
-                                                }}
-                                                style={{
-                                                    // 지도의 크기
-                                                    width: "350px",
-                                                    height: "300px",
-                                                    marginTop: "10px",
-                                                    border: '1px solid'
-                                                }}
-                                                level={3} // 지도의 확대 레벨
-                                            />
+                                        <div style={{ marginTop: '15px', marginRight: '30px' }}>
+                                            <form className="inputForm" onSubmit={handleSubmit}>
+                                                장소<input placeholder="장소를 입력하세요" value={location} onChange={(e) => setLocation(e.target.value)} style={{ border: 'solid 1px', marginLeft: '5px', width: '265px' }} />
+                                                <button type="submit" style={{ border: 'solid 1px' }}>검색</button>
+                                            </form>
+                                            <MapContainer searchPlace={Place} />
                                         </div>
                                     </div>
                                 </div>
@@ -313,36 +348,36 @@ function MakeGroup() {
                                 <input value={content} placeholder="내용" type="text" onChange={(e) => setContent(e.target.value)} style={{ marginTop: '15px', marginLeft: '20px', height: '250px', width: '720px' }} />
                             </div>
                             {/* <DraftEditor /> */}
-                            <div style={{ display: 'flex', marginTop: '30px', marginLeft:'50px' }}>
+                            <div style={{ display: 'flex', marginTop: '30px', marginLeft: '100px' }}>
                                 <div style={{ display: 'flex' }} >
                                     <div>실력</div>
-                                    <select className="tag" style={{ borderRadius: '5px', marginLeft: '10px' }}>
-                                        <option value="newbie">헬스 그게 뭐죠?</option>
-                                        <option value="dog">Dog</option>
-                                        <option value="cat">Cat</option>
-                                        <option value="hamster">Hamster</option>
+                                    <select className="tag1" onChange={(e) => setTag1(e.target.value)} style={{ borderRadius: '5px', marginLeft: '10px' }}>
+                                        <option value="">선택</option>
+                                        <option value="초보">초보</option>
+                                        <option value="중수">중수</option>
+                                        <option value="고수">고수</option>
                                     </select>
                                 </div>
                                 <div style={{ display: 'flex' }} >
                                     <div>분위기</div>
-                                    <select className="tag" id="tag" style={{ borderRadius: '5px', marginLeft: '10px' }}>
-                                        <option value="focus">운동에만 집중!</option>
-                                        <option value="dog">Dog</option>
-                                        <option value="cat">Cat</option>
-                                        <option value="hamster">Hamster</option>
+                                    <select className="tag2" onChange={(e) => setTag2(e.target.value)} style={{ borderRadius: '5px', marginLeft: '10px' }}>
+                                        <option value="">선택</option>
+                                        <option value="집중">운동에만 집중</option>
+                                        <option value="친목도모">친목도모</option>
+                                        <option value="쉬엄쉬엄">쉬엄쉬엄</option>
                                     </select>
                                 </div>
                                 <div style={{ display: 'flex' }} >
                                     <div>스타일</div>
-                                    <select className="tag" id="tag" style={{ borderRadius: '5px', marginLeft: '10px' }}>
-                                        <option value="free-weight">프리웨이트</option>
-                                        <option value="dog">Dog</option>
-                                        <option value="cat">Cat</option>
-                                        <option value="hamster">Hamster</option>
+                                    <select className="tag3" onChange={(e) => setTag3(e.target.value)} style={{ borderRadius: '5px', marginLeft: '10px' }}>
+                                        <option value="">선택</option>
+                                        <option value="프리웨이트">프리웨이트</option>
+                                        <option value="머신위주">머신위주</option>
+                                        <option value="맨몸운동">맨몸운동</option>
                                     </select>
                                 </div>
                             </div>
-                            <div style={{ float: 'right', marginTop: '20px', marginRight: '40px' }}><BtnOne type="button" onClick={() => writeBbs()}>생성하기</BtnOne></div>
+                            <div style={{ float: 'right', marginTop: '20px', marginRight: '40px' }}><BtnOne type="button" onClick={() => Communitywrite()}>생성하기</BtnOne></div>
                         </GymInfoTwo>
                     </Col>
                     <CommunityBanner />
