@@ -18,7 +18,7 @@ const TrainerItem = styled.div`
   width: 80%;
   margin-bottom: 1rem;
   cursor: pointer;
-  background-color: #f1f1f1;
+  background-color: white;
   padding: 1rem;
   border-radius: 10px;
   pointer-events: auto;
@@ -48,13 +48,26 @@ const LikeWrapper = styled.div`
   bottom: 0;
 `;
 const LikeButton = styled.button`
-  align-self: flex-end;
-  pointer-events: auto;
+  padding: 10px 20px;
+  background-color: #ff6b81;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: #fff;
+    color: #ff6b81;
+  }
 `;
 
 const LikeCount = styled.span`
-  align-self: flex-end;
+  margin-left: 5px;
 `;
+
 
 
 const Trainers = () => {
@@ -107,12 +120,15 @@ const Trainers = () => {
     console.log('isLiked:', isLiked);
   
     try {
-      const formData = new FormData();
-      formData.append("pt_seq", id);
-      formData.append("nickname", nickname);
-      formData.append("isLiked", !isLiked);
+      const requestData = {
+        pt_seq: id,
+        nickname: nickname,
+        isLiked: !isLiked,
+      };
   
-      const response = await axiosInstance.post("/toggleLike", formData);
+      const response = await axios.post("http://localhost:3000/toggleLike", requestData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
   
       if (response.status === 200) {
         const { success, updatedLikes } = response.data;
@@ -164,8 +180,8 @@ const Trainers = () => {
                       }}
                     >
                       {trainer.isLiked ? "💔 좋아요 취소" : "❤️ 좋아요"}
+                    <LikeCount>{trainer.love}</LikeCount>
                     </LikeButton>
-                    <LikeCount>{trainer.love}개</LikeCount>
                   </LikeWrapper>
               </TrainerContent>
             </TrainerItem>

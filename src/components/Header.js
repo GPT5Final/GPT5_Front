@@ -5,6 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+
 function Header() {
   const [logIn, setLogIn] = useState(false);
   const [nickname, setNickname] = useState("");
@@ -23,7 +24,7 @@ function Header() {
         <Navbar.Brand>
           <Link to="/">
             <img
-              src="./gpt_logo.png"
+              src="/gpt_logo.png"
               style={{
                 width: "6vw",
                 marginRight: "1rem",
