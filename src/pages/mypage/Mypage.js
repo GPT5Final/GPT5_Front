@@ -40,7 +40,6 @@ function Mypage(){
                 .then(function(res){
                     let men = JSON.stringify(res.data);
                     localStorage.setItem("login", men);
-                    alert(men);
                     window.location.reload();
                 })
                 .catch(function(err){
