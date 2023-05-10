@@ -13,7 +13,11 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
-import Mypage from "./pages/Mypage";
+import Mypage from './pages/mypage/Mypage';
+import Mypagecal from "./pages/mypage/Mypagecal";
+import Mypagegroup from './pages/mypage/Mypagegroup';
+import Mypageleave from './pages/mypage/Mypageleave';
+import Mypagereference from './pages/mypage/Mypagereference';
 import Guide from "./pages/Guide";
 import Diet from "./pages/Diet";
 import Exercise from "./pages/Exercise";
@@ -34,6 +38,10 @@ const Router = () => {
         <Route path="/main" element={<Main />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypagecal" element={<Mypagecal />} />
+        <Route path="/mypagegroup" element={<Mypagegroup />} />
+        <Route path="/mypageleave" element={<Mypageleave />} />
+        <Route path="/mypagereference" element={<Mypagereference />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/gyms" element={<Gyms />} />
