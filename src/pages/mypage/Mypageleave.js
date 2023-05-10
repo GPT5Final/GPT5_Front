@@ -18,12 +18,11 @@ function Mypageleave(){
     const handleShow = () => setShow(true);
 
     function leave(e){
-        e.preventDefault();
         let dm = JSON.parse(localStorage.getItem("login"));
-
         axios.post("http://localhost:3000/delmember",null, { params:dm })
         .then(function(resp){
             if(resp.data === "YES"){
+                alert(resp.data);
                 alert('탈퇴 성공');
                 history("/logout")
             }else{
@@ -57,8 +56,8 @@ function Mypageleave(){
                     <Modal.Title>나의 운동</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                            탈퇴하시려면 y를 입력해주세요<br/><br/>
-                            <input type="text"></input>
+                            탈퇴하시려면 탈퇴를 입력해주세요<br/><br/>
+                            <input type="text" ></input>
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="dark" size="sm" onClick={leave}>
