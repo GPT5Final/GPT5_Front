@@ -53,21 +53,34 @@ const TrainersUpload = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFile(file);
+    // 이미지 미리보기 설정
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
   
-    // 이미지를 Quill 에디터에 삽입
-  const reader = new FileReader();
-  reader.addEventListener("load", () => {
-    const imageBase64 = reader.result;
+//     // 이미지를 Quill 에디터에 삽입
+//   const reader = new FileReader();
+//   reader.addEventListener("load", () => {
+//     const imageBase64 = reader.result;
+//     const quill = quillRef.current.getEditor();
+//     quill.focus(); // 포커스 주기
+//     const range = quill.getSelection(true); // 포커스가 있는 상태에서 range 얻기
+//     quill.insertEmbed(range.index, "image", imageBase64);
+//   }, false);
+
+//   if (file) {
+//     reader.readAsDataURL(file);
+//   }
+// };
+  const handlePreviewImageClick = () => {
     const quill = quillRef.current.getEditor();
     quill.focus(); // 포커스 주기
     const range = quill.getSelection(true); // 포커스가 있는 상태에서 range 얻기
-    quill.insertEmbed(range.index, "image", imageBase64);
-  }, false);
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-};
+    quill.insertEmbed(range.index, "image", previewImage);
+  };
   
 
   return (
@@ -90,11 +103,17 @@ const TrainersUpload = () => {
             onChange={handleImageChange}
             className={styles['upload-file']}
           />
-          {previewImage && (
-                  <div className={styles['image-preview']}>
-                    <img src={previewImage} alt="preview" />
-                  </div>
-                )}
+          {
+            previewImage && (
+              <div className={styles['image-preview']}>
+                <img
+                  src={previewImage}
+                  alt="preview"
+                  onClick={handlePreviewImageClick} // 이벤트 추가
+                />
+              </div>
+            )
+          }
                 
           <label className={styles['upload-label']}></label>
           <ReactQuill
