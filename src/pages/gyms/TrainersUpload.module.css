@@ -27,6 +27,7 @@
 .upload-textarea {
   min-height: 200px;
   resize: vertical;
+  border: 1px solid #fdfbfb;
 }
 
 .upload-submit {
@@ -50,4 +51,9 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+.upload-quill {
+  margin-bottom: 1rem;
+  width: 100%;
 }
