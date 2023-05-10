@@ -36,6 +36,7 @@ function Login() {
         if (resp.data !== null && resp.data !== "") {
           alert(resp.data.nickname + "님 환영합니다");
           localStorage.setItem("login", JSON.stringify(resp.data));
+          localStorage.setItem("email", resp.data.email);
           history("/main");
         } else {
           alert("email 또는 password를 확인해주세요.");
