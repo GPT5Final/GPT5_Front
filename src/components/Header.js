@@ -5,6 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+
 function Header() {
   const [logIn, setLogIn] = useState(false);
   const [nickname, setNickname] = useState("");
@@ -23,7 +24,7 @@ function Header() {
         <Navbar.Brand>
           <Link to="/">
             <img
-              src="./gpt_logo.png"
+              src="/gpt_logo.png"
               style={{
                 width: "6vw",
                 marginRight: "1rem",
@@ -34,15 +35,17 @@ function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mx-auto">
-            <Nav.Link
-              as={Link}
-              to="/gyms"
-              className="nav-link"
-              style={{ marginLeft: "5vw" }}
-            >
+
+        <Nav className="mx-auto">
+          <NavDropdown title="GYMS" id="gyms-dropdown" style={{ marginLeft: "5vw" }}>
+            <NavDropdown.Item as={Link} to="/gyms">
               GYMS
-            </Nav.Link>
+            </NavDropdown.Item>            
+            <NavDropdown.Item as={Link} to="/trainers">
+              TRAINERS
+            </NavDropdown.Item>
+          </NavDropdown>
+
             <Nav.Link
               as={Link}
               to="/information"
@@ -53,7 +56,7 @@ function Header() {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/makeGroup"
+              to="/community/Home"
               className="nav-link"
               style={{ marginLeft: "5vw" }}
             >
@@ -61,11 +64,11 @@ function Header() {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/stretching"
+              to="/guide"
               className="nav-link"
               style={{ marginLeft: "5vw" }}
             >
-              STRETCHING
+              GUIDE
             </Nav.Link>
           </Nav>
           <Nav className="ms-auto" style={{ marginTop: "-6rem" }}>

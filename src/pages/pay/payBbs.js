@@ -7,10 +7,8 @@ function PayBbs() {
   const [paymentlist, setPaymentlist] = useState([]);
   const [coinpaymentlist, setCoinpaymentlist] = useState([]);
   const [nickname, setNickname] = useState("");
-
-  let history = useNavigate();
-
-  const fetchData = async (user) => {
+  const history = useNavigate();
+  const fetchData = async () => {
     await axios
       .post("http://localhost:3000/getPaymentBbs", null, {
         params: { nickname: user },
@@ -41,7 +39,7 @@ function PayBbs() {
       const user = JSON.parse(localStorage.getItem("login"));
 
       if (user !== undefined && user !== null) {
-        //console.log(user.nickname);
+        console.log(user.nickname);
         setNickname(user.nickname);
         fetchData(user.nickname);
       } else {
