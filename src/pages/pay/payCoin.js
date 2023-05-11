@@ -85,7 +85,7 @@ function PayCoin() {
     }
   }
 
-  function payBtn() {
+  async function payBtn() {
     if (payCoin === 0) {
       alert("상품을 선택해 주십시오.");
       return;
@@ -102,7 +102,7 @@ function PayCoin() {
       ordername: ordername,
     };
 
-    axios
+    await axios
       .post("http://localhost:3000/addCoinPayment", null, {
         params: payData,
       })
@@ -130,20 +130,7 @@ function PayCoin() {
               alert(err);
             });
 
-          axios
-            .post("http://localhost:3000/getMember", null, {
-              params: { nickname: buyer },
-            })
-            .then(function (resp) {
-              const men = JSON.stringify(resp.data);
-              localStorage.setItem("login", men);
-            })
-            .catch(function (err) {
-              alert(err);
-            });
-
           alert("구매가 완료 되었습니다.");
-          history("/payCoin");
         } else {
           alert("구매에 실패 했습니다.");
         }
@@ -151,6 +138,19 @@ function PayCoin() {
       .catch(function (err) {
         alert(err);
       });
+
+    axios
+      .post("http://localhost:3000/getMember", null, {
+        params: { nickname: buyer },
+      })
+      .then(function (resp) {
+        const men = JSON.stringify(resp.data);
+        localStorage.setItem("login", men);
+      })
+      .catch(function (err) {
+        alert(err);
+      });
+    history("/");
   }
 
   function initBtn() {

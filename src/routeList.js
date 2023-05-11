@@ -13,16 +13,17 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
-import Mypage from './pages/mypage/Mypage';
+import Mypage from "./pages/mypage/Mypage";
 import Mypagecal from "./pages/mypage/Mypagecal";
-import Mypagegroup from './pages/mypage/Mypagegroup';
-import Mypageleave from './pages/mypage/Mypageleave';
-import Mypagereference from './pages/mypage/Mypagereference';
+import Mypagegroup from "./pages/mypage/Mypagegroup";
+import Mypageleave from "./pages/mypage/Mypageleave";
+import Mypagereference from "./pages/mypage/Mypagereference";
 import Guide from "./pages/Guide";
 import Diet from "./pages/Diet";
 import Exercise from "./pages/Exercise";
 import Information from "./pages/Information";
-import PayBbs from "./pages/pay/payBbs";
+import ChargeBbs from "./pages/pay/ChargeBbs";
+import PaymentBbs from "./pages/pay/PaymentBbs";
 import Charge from "./pages/pay/Charge";
 import PayCoin from "./pages/pay/payCoin";
 import Trainers from "./pages/gyms/Trainers";
@@ -53,7 +54,8 @@ const Router = () => {
         <Route path="/community/MakeGroup" element={<MakeGroup />} />
         <Route path="/stretching" element={<Stretching />} />
         <Route path="/information" element={<Information />} />
-        <Route path="/payBbs" element={<PayBbs />} />
+        <Route path="/ChargeBbs" element={<ChargeBbs />} />
+        <Route path="/PaymentBbs" element={<PaymentBbs />} />
         <Route path="/payCoin" element={<PayCoin />} />
         <Route path="/trainers" element={<Trainers />} />
         <Route path="/trainersupload" element={<TrainersUpload />} />
