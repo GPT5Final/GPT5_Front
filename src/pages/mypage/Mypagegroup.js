@@ -9,7 +9,7 @@ function Mypagecal(){
         <div className='main_layout'>
             <Mypageheader />
             <Container className="cal_box" >
-            그룹인가
+            그룹
             </Container>
         </div>
     )

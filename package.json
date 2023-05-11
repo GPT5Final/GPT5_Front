@@ -4,7 +4,11 @@
   "private": true,
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.7",
+    "@fullcalendar/google-calendar": "^6.1.7",
+    "@fullcalendar/interaction": "^6.1.7",
+    "@fullcalendar/list": "^6.1.7",
     "@fullcalendar/react": "^6.1.7",
+    "@fullcalendar/timegrid": "^6.1.7",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -32,7 +36,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set PORT=9001 && react-scripts start",
+    "start": "export PORT=9001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

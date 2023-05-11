@@ -43,24 +43,19 @@ function Login() {
       })
       .catch(function (error) {
         console.error(error);
-        alert("서버 오류가 발생했습니다.");
-      });
-  };
-
-  useEffect(
-    function () {
-      let user_email = cookies.user_email;
-      if (user_email !== undefined && user_email !== "") {
+        alert('서버 오류가 발생했습니다.');
+      })
+  }
+  useEffect(function(){
+    let user_email = cookies.user_email;
+      if(user_email !== undefined && user_email !== ""){
         setEmail(user_email);
         setSaveEmail(true);
-      } else {
-        setEmail("");
+      }else{
+        setEmail('');
         setSaveEmail(false);
       }
-    },
-    [cookies]
-  );
-
+  }, [cookies]);
   return (
     <>
       <Header />

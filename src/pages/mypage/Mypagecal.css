@@ -1,0 +1,24 @@
+.fc-day-sun a {
+    color: red;
+}
+  
+/* 토요일 날짜: 파란색 */
+.fc-day-sat a {
+    color: blue;
+}
+
+.fc-day-mon a{
+    color: black;
+}
+.fc-day-tue a{
+    color: black;
+}
+.fc-day-wed a{
+    color: black;
+}
+.fc-day-thu a{
+    color: black;
+}
+.fc-day-fri a{
+    color: black;
+}

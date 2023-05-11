@@ -82,46 +82,38 @@ function Header() {
             </Nav.Link>
           </Nav>
           <Nav className="ms-auto" style={{ marginTop: "-6rem" }}>
-            {logIn ? (
-              <>
-                <Nav.Link
-                  as={Link}
-                  to="/mypage"
-                  className="nav-link"
-                  style={{ fontSize: "0.9rem" }}
-                >
-                  {nickname}
-                </Nav.Link>
-                <Nav.Link
-                  as={Link}
-                  to="/logout"
-                  className="nav-link"
-                  style={{ fontSize: "0.9rem" }}
-                >
-                  LOGOUT
-                </Nav.Link>
-              </>
-            ) : (
-              <>
-                <Nav.Link
-                  as={Link}
-                  to="/mypage"
-                  className="nav-link"
-                  style={{ fontSize: "0.9rem" }}
-                >
-                  MYPAGE
-                </Nav.Link>
-                <Nav.Link
-                  as={Link}
-                  to="/login"
-                  className="nav-link"
-                  style={{ fontSize: "0.9rem" }}
-                >
-                  LOGIN
-                </Nav.Link>
-              </>
-            )}
-          </Nav>
+          {logIn ? (
+        <>
+          <Nav.Link
+            as={Link}
+            to="/mypage"
+            className="nav-link"
+            style={{ fontSize: "0.9rem" }}
+          >
+            {nickname}
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/logout"
+            className="nav-link"
+            style={{ fontSize: "0.9rem" }}
+          >
+            LOGOUT
+          </Nav.Link>
+        </>
+      ) : (
+        <>
+          <Nav.Link
+            as={Link}
+            to="/login"
+            className="nav-link"
+            style={{ fontSize: "0.9rem" }}
+          >
+            LOGIN
+          </Nav.Link>
+        </>
+      )}
+    </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useMemo } from "react";
 import { Container, ListGroup, Card, Button } from "react-bootstrap";
 import "./Mypage.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Mypageheader() {
@@ -13,59 +13,57 @@ function Mypageheader() {
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef();
 
-  const TokenEmail = localStorage.getItem("email");
-  const token = { email: TokenEmail };
+    const TokenEmail = localStorage.getItem("email");
+    const token = useMemo(() => ({ email: TokenEmail }), [TokenEmail]);
 
-  const history = useNavigate();
+    let history = useNavigate();
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:3000/allmember", token)
-      .then((response) => {
-        setEmail(response.data.email);
-        setNickname(response.data.nickname);
-        setProfile(response.data.profile);
-        setCoin(response.data.coin);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }, []);
+    useEffect(() => {
+        axios.post("http://localhost:3000/allmember", token)
+            .then((response) => {
+                setEmail(response.data.email);
+                setNickname(response.data.nickname);
+                setProfile(response.data.profile);
+                setCoin(response.data.coin);
+            })
+            .catch((err) => {
+                alert(err)
+            });
+    }, [token]);
 
-  const handleImageChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setImage(selectedFile);
-    setPreviewUrl(URL.createObjectURL(selectedFile));
-  };
+    const handleImageChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setImage(selectedFile);
+        setPreviewUrl(URL.createObjectURL(selectedFile));
+    }
+    
+    const handleClick = () => {
+        fileInputRef.current.click();
+    };
 
-  const handleClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("profile", profile);
-    formData.append("image", image);
-    axios
-      .post("http://localhost:3000/updatemember", formData)
-      .then(function (resp) {
-        if (resp.data === "YES") {
-          alert("정상적으로 변경");
-          window.location.reload();
-        } else {
-          alert("가입되지 않았습니다");
-        }
-      })
-      .catch(function (err) {
-        alert("err");
-      });
-  };
-
-  const coinBtn = () => {
-    history("/charge");
-  };
+    const chargeBtn =() =>{
+        history("/charge");
+    }
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+            formData.append("email", email);
+            formData.append("profile", profile);
+            formData.append("image", image);
+            axios.post("http://localhost:3000/updatemember", formData )
+            .then(function(resp){
+                if(resp.data === "YES"){
+                    alert('정상적으로 변경');
+                    window.location.reload();
+                }else{
+                    alert('가입되지 않았습니다');
+                }
+            })
+            .catch(function(err){
+                alert('err')
+            })
+    }
 
   return (
     <div className="nav_box">
