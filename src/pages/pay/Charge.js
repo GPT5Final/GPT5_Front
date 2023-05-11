@@ -134,15 +134,16 @@ function Charge() {
           orderid: data.orderId,
           paymentkey: data.paymentKey,
         };
+
         axios
-          .post("http://localhost:3000/addPayment", null, {
+          .post("http://localhost:3000/addChargeBbs", null, {
             params: paymentParams,
           })
           .then(function (resp) {
             if (resp.data === "SUCCESS") {
               console.log(resp.data);
             } else {
-              alert("FAIL addPayment");
+              alert("FAIL addChargeBbs");
               return;
             }
           })

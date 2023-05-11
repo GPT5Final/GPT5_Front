@@ -85,7 +85,7 @@ function PayCoin() {
     }
   }
 
-  function payBtn() {
+  async function payBtn() {
     if (payCoin === 0) {
       alert("상품을 선택해 주십시오.");
       return;
@@ -102,7 +102,7 @@ function PayCoin() {
       ordername: ordername,
     };
 
-    axios
+    await axios
       .post("http://localhost:3000/addCoinPayment", null, {
         params: payData,
       })
@@ -130,20 +130,7 @@ function PayCoin() {
               alert(err);
             });
 
-          axios
-            .post("http://localhost:3000/getMember", null, {
-              params: { nickname: buyer },
-            })
-            .then(function (resp) {
-              const men = JSON.stringify(resp.data);
-              localStorage.setItem("login", men);
-            })
-            .catch(function (err) {
-              alert(err);
-            });
-
           alert("구매가 완료 되었습니다.");
-          history("/payCoin");
         } else {
           alert("구매에 실패 했습니다.");
         }
@@ -151,6 +138,19 @@ function PayCoin() {
       .catch(function (err) {
         alert(err);
       });
+
+    axios
+      .post("http://localhost:3000/getMember", null, {
+        params: { nickname: buyer },
+      })
+      .then(function (resp) {
+        const men = JSON.stringify(resp.data);
+        localStorage.setItem("login", men);
+      })
+      .catch(function (err) {
+        alert(err);
+      });
+    history("/");
   }
 
   function initBtn() {
@@ -163,104 +163,106 @@ function PayCoin() {
   return (
     <>
       <Header />
-      <div style={{ marginTop: "3vh", textAlign: "center" }}>
-        <h1>payCoin</h1>
-      </div>
-      <div style={{ marginTop: "3vh" }}></div>
-      <div style={{ backgroundColor: "black", paddingBottom: "10vh" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            paddingTop: "2vh",
-          }}
-        >
-          <CoinSelectBox
-            type="button"
-            onClick={() => culBtn("Product A", 5000, "GPT5")}
-          >
-            <h6>Product A</h6>
-            <div style={{ marginTop: "3vh" }}>5000 coin</div>
-            <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
-          </CoinSelectBox>
-          <CoinSelectBox
-            type="button"
-            onClick={() => culBtn("Product B", 10000, "GPT5")}
-          >
-            <h6>Product B</h6>
-            <div style={{ marginTop: "3vh" }}>10000 coin</div>
-            <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
-          </CoinSelectBox>
-          <CoinSelectBox
-            type="button"
-            onClick={() => culBtn("Product C", 20000, "GPT5")}
-          >
-            <h6>Product C</h6>
-            <div style={{ marginTop: "3vh" }}>20000 coin</div>
-            <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
-          </CoinSelectBox>
-          <CoinSelectBox
-            type="button"
-            onClick={() => culBtn("Product D", 30000, "GPT5")}
-          >
-            <h6>Product D</h6>
-            <div style={{ marginTop: "3vh" }}>30000 coin</div>
-            <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
-          </CoinSelectBox>
-          <CoinSelectBox
-            type="button"
-            onClick={() => culBtn("Product F", 40000, "GPT5")}
-          >
-            <h6>Product F</h6>
-            <div style={{ marginTop: "3vh" }}>40000 coin</div>
-            <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
-          </CoinSelectBox>
+      <Container>
+        <div style={{ marginTop: "3vh", textAlign: "center" }}>
+          <h1>payCoin</h1>
         </div>
-        <Container style={{ marginTop: "10vh" }}>
-          <Row>
-            <Col>
-              <div>
-                <h3 style={{ color: "white" }}>{buyer}님의 Current coin</h3>
-                <CoinInputBox>{coin}</CoinInputBox>
-              </div>
-              <div style={{ marginTop: "2vh" }}>
-                <h3 style={{ color: "white" }}>지불 금액</h3>
-                <CoinInputBox>{payCoin}</CoinInputBox>
-              </div>
-              <div style={{ marginTop: "2vh" }}>
-                <h3 style={{ color: "white" }}>After coin</h3>
-                <CoinInputBox>{afterCoin}</CoinInputBox>
-              </div>
-            </Col>
-            <Col>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginTop: "23vh",
-                }}
-                type="button"
-                onClick={payBtn}
-              >
-                <CoinClickBox>pay</CoinClickBox>
-              </div>
-            </Col>
-            <Col>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "23vh",
-                }}
-                type="button"
-                onClick={initBtn}
-              >
-                <CoinClickBox>init</CoinClickBox>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+        <div style={{ marginTop: "3vh" }}></div>
+        <div style={{ backgroundColor: "black", paddingBottom: "10vh" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              paddingTop: "2vh",
+            }}
+          >
+            <CoinSelectBox
+              type="button"
+              onClick={() => culBtn("Product A", 5000, "GPT5")}
+            >
+              <h6>Product A</h6>
+              <div style={{ marginTop: "3vh" }}>5000 coin</div>
+              <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
+            </CoinSelectBox>
+            <CoinSelectBox
+              type="button"
+              onClick={() => culBtn("Product B", 10000, "GPT5")}
+            >
+              <h6>Product B</h6>
+              <div style={{ marginTop: "3vh" }}>10000 coin</div>
+              <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
+            </CoinSelectBox>
+            <CoinSelectBox
+              type="button"
+              onClick={() => culBtn("Product C", 20000, "GPT5")}
+            >
+              <h6>Product C</h6>
+              <div style={{ marginTop: "3vh" }}>20000 coin</div>
+              <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
+            </CoinSelectBox>
+            <CoinSelectBox
+              type="button"
+              onClick={() => culBtn("Product D", 30000, "GPT5")}
+            >
+              <h6>Product D</h6>
+              <div style={{ marginTop: "3vh" }}>30000 coin</div>
+              <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
+            </CoinSelectBox>
+            <CoinSelectBox
+              type="button"
+              onClick={() => culBtn("Product F", 40000, "GPT5")}
+            >
+              <h6>Product F</h6>
+              <div style={{ marginTop: "3vh" }}>40000 coin</div>
+              <div style={{ marginTop: "3vh" }}>Seller : GPT5</div>
+            </CoinSelectBox>
+          </div>
+          <Container style={{ marginTop: "10vh" }}>
+            <Row>
+              <Col>
+                <div>
+                  <h3 style={{ color: "white" }}>{buyer}님의 Current coin</h3>
+                  <CoinInputBox>{coin}</CoinInputBox>
+                </div>
+                <div style={{ marginTop: "2vh" }}>
+                  <h3 style={{ color: "white" }}>지불 금액</h3>
+                  <CoinInputBox>{payCoin}</CoinInputBox>
+                </div>
+                <div style={{ marginTop: "2vh" }}>
+                  <h3 style={{ color: "white" }}>After coin</h3>
+                  <CoinInputBox>{afterCoin}</CoinInputBox>
+                </div>
+              </Col>
+              <Col>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginTop: "23vh",
+                  }}
+                  type="button"
+                  onClick={payBtn}
+                >
+                  <CoinClickBox>pay</CoinClickBox>
+                </div>
+              </Col>
+              <Col>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "23vh",
+                  }}
+                  type="button"
+                  onClick={initBtn}
+                >
+                  <CoinClickBox>init</CoinClickBox>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      </Container>
       <Footer marginTop={"0px"} />
     </>
   );
