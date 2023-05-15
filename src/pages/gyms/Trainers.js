@@ -76,6 +76,16 @@ const Trainers = () => {
   const [trainers, setTrainers] = useState([]);
   const [userAuth, setUserAuth] = useState(null);
   const navigate = useNavigate();
+  const removePTags = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const pTags = doc.getElementsByTagName("p");
+    for (let i = 0; i < pTags.length; i++) {
+      const pTag = pTags[i];
+      pTag.outerHTML = pTag.innerHTML; // <p> 태그를 제거하고 내용만 남깁니다
+    }
+    return doc.body.innerHTML;
+  }
 
   useEffect(() => {
     const logInUser = JSON.parse(localStorage.getItem("login"));
@@ -97,8 +107,10 @@ const Trainers = () => {
         setTrainers(
           response.data.trainers.map((trainer) => ({
             ...trainer,
+            content: removePTags(trainer.content), // <p> 태그 제거
             isLiked: false, // 초기 상태를 false로 설정
             }))
+            .sort((a, b) => b.love - a.love) // 좋아요(love) 수를 기반으로 내림차순 정렬            
           );
         } catch (error) {
         console.error("트레이너 데이터를 가져오는데 실패했습니다.", error);
@@ -169,10 +181,10 @@ const Trainers = () => {
         {trainers.length > 0 ? (
           trainers.map((trainer) => (
             <TrainerItem key={trainer.seq} onClick={() => handleTrainerClick(trainer.seq)}>          
-              <TrainerImage src={`http://localhost:3000/static/images/${trainer.newfilename}`} alt={trainer.nickname} />                          
+              <TrainerImage src={`http://localhost:3000/static/images/${trainer.firstImage.newfilename}`} alt={trainer.nickname} />                          
                 <TrainerContent>
-                  <div>이름: {trainer.nickname}</div>
-                  <div>제목: {trainer.title}</div>
+                  <div>이름: {trainer.title}</div>
+                  <div>경력: {trainer.content}</div>
                   <LikeWrapper>
                     <LikeButton
                       onClick={(e) => {

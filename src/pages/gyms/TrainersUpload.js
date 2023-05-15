@@ -10,9 +10,11 @@ import styles from './TrainersUpload.module.css';
 const TrainersUpload = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const quillRef = useRef();
-  const [previewImage, setPreviewImage] = useState(null);
+  // const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState([]); 
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
 
@@ -29,13 +31,16 @@ const TrainersUpload = () => {
       alert('제목을 입력해 주세요');
       return;
     }
-
+  
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('file', file);
+    // 여러 파일을 처리하기 위한 수정
+    files.forEach((file, index) => {
+      formData.append(`file`, file);
+    });
     formData.append('nickname', nickname);
-
+  
     axios.post("http://localhost:3000/trainerwrite", formData)
       .then(res => {
         console.log(res.data);
@@ -50,36 +55,40 @@ const TrainersUpload = () => {
       });
   };
 
+
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setFile(file);
+  //   // 이미지 미리보기 설정
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     setPreviewImage(reader.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
+  
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFile(file);
+    const files = e.target.files;
+    const fileArray = Array.from(files);
+    setFiles(prev => [...prev, ...fileArray]);
     // 이미지 미리보기 설정
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPreviewImage(reader.result);
-    };
-    reader.readAsDataURL(file);
+    fileArray.forEach(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(prev => [...prev, reader.result]);
+      };
+      reader.readAsDataURL(file);
+    });
   };
   
-//     // 이미지를 Quill 에디터에 삽입
-//   const reader = new FileReader();
-//   reader.addEventListener("load", () => {
-//     const imageBase64 = reader.result;
-//     const quill = quillRef.current.getEditor();
-//     quill.focus(); // 포커스 주기
-//     const range = quill.getSelection(true); // 포커스가 있는 상태에서 range 얻기
-//     quill.insertEmbed(range.index, "image", imageBase64);
-//   }, false);
 
-//   if (file) {
-//     reader.readAsDataURL(file);
-//   }
-// };
-  const handlePreviewImageClick = () => {
+
+  const handlePreviewImageClick = (index) => {
     const quill = quillRef.current.getEditor();
     quill.focus(); // 포커스 주기
     const range = quill.getSelection(true); // 포커스가 있는 상태에서 range 얻기
-    quill.insertEmbed(range.index, "image", previewImage);
+    quill.insertEmbed(range.index, "image", previewImage[index]); // 선택한 이미지 삽입
   };
   
 
@@ -96,23 +105,23 @@ const TrainersUpload = () => {
             className={styles['upload-input']}
             placeholder="제목을 기입해주세요"
           />
-          <label className={styles['upload-label']}></label>
           <input
             type="file"
             accept="image/*"
             onChange={handleImageChange}
             className={styles['upload-file']}
+            multiple
           />
           {
-            previewImage && (
-              <div className={styles['image-preview']}>
+            previewImage && previewImage.map((image, index) => (
+              <div className={styles['image-preview']} key={index}>
                 <img
-                  src={previewImage}
+                  src={image}
                   alt="preview"
-                  onClick={handlePreviewImageClick} // 이벤트 추가
+                  onClick={() => handlePreviewImageClick(index)} // 이벤트 추가
                 />
               </div>
-            )
+            ))
           }
                 
           <label className={styles['upload-label']}></label>
