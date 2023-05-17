@@ -46,7 +46,7 @@ function InquiryDetail() {
   const deleteBtn = async () => {
     await axios
       .post("http://localhost:3000/deleteInquiryBbs", null, {
-        param: { seq: params.seq },
+        params: { seq: params.seq },
       })
       .then(function (resp) {
         if (resp.data === "SUCCESS") {

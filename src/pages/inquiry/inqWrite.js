@@ -82,7 +82,7 @@ function InqWrite() {
       }
 
       axios
-        .post("http://localhost:3000/fileUpload", formData)
+        .post("http://localhost:3000/imgFileUpload", formData)
         .then(function (resp) {
           //console.log(resp.data);
           if (resp.data === "SUCCESS") {
