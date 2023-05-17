@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useMemo } from "react";
 import Mypageheader from './Mypageheader';
 import { Button, Container } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +7,27 @@ import axios from 'axios';
 
 
 function Mypageleave(){
-    const [email, setEmail] = useState("");
-    const [leavecheck, setLeavecheck] = useState('');
+    const [email, setEmail] = useState('');
+    
+    const TokenEmail = localStorage.getItem("email");
+    const token = useMemo(() => ({ email: TokenEmail }), [TokenEmail]);
+    // const [leavecheck, setLeavecheck] = useState('');
 
     let history = useNavigate();
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        axios.post("http://localhost:3000/allmember", token)
+            .then((response) => {
+                setEmail(response.data.email);
+            })
+            .catch((err) => {
+                alert(err)
+            });
+    }, [token]);
 
     function leave(e){
         let dm = JSON.parse(localStorage.getItem("login"));
@@ -47,25 +59,18 @@ function Mypageleave(){
                 <p>탈퇴 후에는 이메일 {email} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</p>
                 <p>게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</p>
                 </div>
-                <Button  variant="dark" size="sm" onClick={handleShow}>
-                    탈퇴하기
-                </Button>
-
-                <Modal show={show} onHide={handleClose}>
+                <Button  variant="dark" size="sm" onClick={handleShow}>탈퇴하기</Button>
+                <Modal show={show} onHide={handleClose} centered>
                     <Modal.Header closeButton>
-                    <Modal.Title>나의 운동</Modal.Title>
+                    <Modal.Title>탈퇴하기</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                             탈퇴하시려면 탈퇴를 입력해주세요<br/><br/>
                             <input type="text" ></input>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="dark" size="sm" onClick={leave}>
-                        탈퇴
-                    </Button>
-                    <Button variant="dark" size="sm" onClick={handleClose}>
-                        취소
-                    </Button>
+                    <Button variant="dark" size="sm" onClick={leave}>탈퇴</Button>
+                    <Button variant="dark" size="sm" onClick={handleClose}>취소</Button>
                     </Modal.Footer>
                 </Modal>
             </Container>
