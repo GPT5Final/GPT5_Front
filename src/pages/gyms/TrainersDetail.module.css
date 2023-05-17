@@ -4,10 +4,11 @@
     margin: 0 auto;
     padding: 30px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
-.detail-image {
+.detail-image {    
     width: 100%;
     max-width: 500px;
     height: auto;
@@ -16,27 +17,36 @@
 }
 
 .detail-info {
-    font-size: 18px;
-    font-weight: bold;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    height: 500px;
+    height: 300px;
+    position: relative;
+}
+
+.detail-info-texts {
+    align-self: flex-start;
 }
 
 .detail-text {
     font-size: 18px;
     font-weight: bold;
 }
+
 .detail-like {
     display: flex;
-    align-items: center;
+    align-items: cenrter;
+    justify-content: center;
     margin-top: 20px;
+    margin-bottom: 2cm;
 }
 
 .detail-buttons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
     display: flex;
     gap: 10px;
 }
@@ -59,7 +69,6 @@
 }
 
 .like-button {
-    margin-right: auto;
     background-color: #ff6b81;
 }
 
