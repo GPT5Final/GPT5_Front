@@ -151,7 +151,7 @@ function Mypageheader() {
               <Link to="/PaymentBbs">코인 결제 내역</Link>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Link to="/Mypagereference">문의 하기</Link>
+              <Link to="/Inquiry">문의 하기</Link>
             </ListGroup.Item>
           </ListGroup>
         </Card>

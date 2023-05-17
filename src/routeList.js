@@ -29,6 +29,9 @@ import PayCoin from "./pages/pay/payCoin";
 import Trainers from "./pages/gyms/Trainers";
 import TrainersUpload from "./pages/gyms/TrainersUpload";
 import TrainersDetail from "./pages/gyms/TrainersDetail";
+import Inquiry from "./pages/inquiry/inquiry";
+import InqWrite from "./pages/inquiry/inqWrite";
+import InquiryDetail from "./pages/inquiry/inquiryDetail";
 
 const Router = () => {
   return (
@@ -42,6 +45,13 @@ const Router = () => {
         <Route path="/mypagegroup" element={<Mypagegroup />} />
         <Route path="/mypageleave" element={<Mypageleave />} />
         <Route path="/mypagereference" element={<Mypagereference />} />
+        <Route path="/Inquiry" element={<Inquiry />} />
+        <Route
+          path="/Inquiry/:choice/:search/:nickname"
+          element={<Inquiry />}
+        />
+        <Route path="/InquiryDetail/:seq" element={<InquiryDetail />} />
+        <Route path="/InqWrite" element={<InqWrite />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/gyms" element={<Gyms />} />
