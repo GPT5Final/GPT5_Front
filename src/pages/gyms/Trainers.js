@@ -6,6 +6,18 @@ import { Footer } from '../../components/Footer';
 import Header from '../../components/Header';
 import axiosInstance from '../../axiosInstance';
 
+const Btn = styled.button`
+  border: none;
+  padding: 0.5rem;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: grey;
+  }
+`;
 
 const TrainerList = styled.div`
   display: flex;
@@ -21,16 +33,13 @@ const TrainerItem = styled.div`
   background-color: white;
   padding: 1rem;
   border-radius: 10px;
-  pointer-events: auto;
 `;
-
 
 const TrainerImage = styled.img`
   width: 150px;
   height: 150px;
   object-fit: cover;
   margin-right: 1rem;
-  pointer-events: auto;
 `;
 
 const TrainerContent = styled.div`
@@ -39,7 +48,16 @@ const TrainerContent = styled.div`
   justify-content: space-between;
   width: 100%;
   position: relative;
-  pointer-events: auto;
+`;
+
+const TrainerTitle = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+const TrainerDescription = styled.div`
+  font-size: 18px;
+  font-weight: 500;
 `;
 
 const LikeWrapper = styled.div`
@@ -47,6 +65,7 @@ const LikeWrapper = styled.div`
   right: 0;
   bottom: 0;
 `;
+
 const LikeButton = styled.button`
   padding: 10px 20px;
   background-color: #ff6b81;
@@ -82,7 +101,7 @@ const Trainers = () => {
     const pTags = doc.getElementsByTagName("p");
     for (let i = 0; i < pTags.length; i++) {
       const pTag = pTags[i];
-      pTag.outerHTML = pTag.innerHTML; // <p> 태그를 제거하고 내용만 남깁니다
+      pTag.outerHTML = pTag.innerHTML; // p태그를 제거
     }
     return doc.body.innerHTML;
   }
@@ -107,10 +126,10 @@ const Trainers = () => {
         setTrainers(
           response.data.trainers.map((trainer) => ({
             ...trainer,
-            content: removePTags(trainer.content), // <p> 태그 제거
+            content: removePTags(trainer.content), // p태그 제거
             isLiked: false,
             }))
-            .sort((a, b) => b.love - a.love) // 좋아요(love) 수를 기반으로 내림차순 정렬            
+            .sort((a, b) => b.love - a.love) // 좋아요 내림차순 정렬            
           );
           console.log(response.data)
           // console.log(response.data.trainer.trainers);
@@ -185,8 +204,8 @@ const Trainers = () => {
             <TrainerItem key={trainer.seq} onClick={() => handleTrainerClick(trainer.seq)}>          
               <TrainerImage src={`http://localhost:3000/static/images/${trainer.firstImage.newfilename}`} alt={trainer.nickname} />                          
                 <TrainerContent>
-                  <div>이름: {trainer.title}</div>
-                  <div>경력: {trainer.content}</div>
+                  <TrainerTitle>{trainer.title}</TrainerTitle>
+                  <TrainerDescription>경력 : {trainer.content}</TrainerDescription>
                   <LikeWrapper>
                     <LikeButton
                       onClick={(e) => {
@@ -205,7 +224,7 @@ const Trainers = () => {
         )}
 
 
-        {userAuth === 0 && <button onClick={handleCreate}>글 작성</button>}
+        {userAuth === 0 && <Btn onClick={handleCreate}>글 작성</Btn>}
       </TrainerList>
       <Footer />
     </>

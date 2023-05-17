@@ -31,8 +31,9 @@
 }
 
 .detail-text {
-    font-size: 18px;
     font-weight: bold;
+    font-size: 1.5em;
+    margin: 1em 0;
 }
 
 .detail-like {

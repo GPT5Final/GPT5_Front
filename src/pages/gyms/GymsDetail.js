@@ -6,6 +6,8 @@ import { Footer } from '../../components/Footer';
 import styles from './TrainersDetail.module.css';
 
 
+
+
 const GymsDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -139,8 +141,8 @@ const GymsDetail = () => {
         ))}
         <div className={styles["detail-info"]}>
           <div className={styles["detail-info-texts"]}>
-            <div className={styles["detail-text"]}>이름: {gym.title}</div>
-            <div className={styles["detail-text"]}>경력: {gym.content}</div>
+            <div className={`${styles["detail-text"]} ${styles["detail-text-bold"]}`}>이름: {gym.title}</div>
+            <div className={`${styles["detail-text"]} ${styles["detail-text-bold"]}`}>경력: {gym.content}</div>
           </div>
           <div className={styles["detail-like"]}>
             <button

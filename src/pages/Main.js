@@ -182,4 +182,4 @@ function Main() {
     )
 }
 
-export default Main
+export default Main;
