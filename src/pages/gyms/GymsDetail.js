@@ -141,8 +141,8 @@ const GymsDetail = () => {
         ))}
         <div className={styles["detail-info"]}>
           <div className={styles["detail-info-texts"]}>
-            <div className={`${styles["detail-text"]} ${styles["detail-text-bold"]}`}>이름: {gym.title}</div>
-            <div className={`${styles["detail-text"]} ${styles["detail-text-bold"]}`}>경력: {gym.content}</div>
+            <div className={`${styles["detail-text"]} ${styles["detail-text-bold"]}`}>{gym.title}</div>
+            <div className={`${styles["detail-text"]} ${styles["detail-text-bold"]}`}>편의시설: {gym.content}</div>
           </div>
           <div className={styles["detail-like"]}>
             <button
