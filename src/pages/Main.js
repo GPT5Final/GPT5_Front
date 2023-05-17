@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import { useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import { Footer } from '../components/Footer';
-
+import axiosInstance from '../axiosInstance';
 
 const Btn = styled.button`
     border-top-left-radius: 15px;
@@ -20,12 +19,6 @@ const Btn = styled.button`
     width: 100px;
     height: 40px;
 `;
-
-// let history = useNavigate();
-
-// function handleCommu(){
-//     history("/Mypage");
-// }
 
 function Main() {
     const history = useNavigate();
@@ -85,10 +78,6 @@ function Main() {
         history(`/gym/${id}`);
     };
 
-    const handleGymsClick = () => {
-        history('/gyms');
-    };
-
     return (
         <>
             <Header />
@@ -102,7 +91,7 @@ function Main() {
                     }}>
                         <h1>GPT-5</h1>
                         <div style={{ fontSize: '1vw' }}>
-                            <div>GymPT-5는 대한민국 최대, 최고의 GYMs 플랫폼으로</div>
+                            <div>GymPT-5는 대한민국 최대, 최고의 GYMs 플렛폼으로</div>
                             <div>제휴GYM과 회원님들뿐 아니라 가입한 모든 사람들이 소통</div>
                             <div>하며 건강한 생활체육문화 조성을 지향합니다.</div>
                         </div>
@@ -129,47 +118,20 @@ function Main() {
                         />
                     </Col>
                 </Row>
-
-                <Row style={{
-                    textAlign: 'center',
-                    marginTop: '8vh'
-                }}>
-                    <Col><h1>GYMS</h1></Col>
-                </Row>
-                <Row style={{
-                    textAlign: 'center',
-                    marginTop: '8vh'
-                }}>
-                    <Col><img src="./jamsil1.png" style={{ width: '230px', height: '' }} /></Col>
-                    <Col><img src="./chanwon.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./jeju.png" style={{ width: '230px' }} /></Col>
-                </Row>
-                
-                <Row style={{
-                    textAlign: 'center',
-                    marginTop: '8vh'
-                }}>
-                    <Col><img src="./incheon.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./hanam.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./anyang.png" style={{ width: '230px' }} /></Col>
-                </Row><br/><br/>
-                <section className='img1'></section>
-
                 <Row style={{ textAlign: 'center', marginTop: '8vh' }}>
                 {carouselItems.slice(0, 3).map(item => (
-                    <Col key={item._id} onClick={() => handleGymClick(item._id)}>
+                    <Col key={item.id} onClick={() => handleGymClick(item.gSeq)}>
                         <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
                     </Col>
                 ))}
             </Row>
             <Row style={{ textAlign: 'center', marginTop: '8vh' }}>
                 {carouselItems.slice(3, 6).map(item => (
-                    <Col key={item._id} onClick={() => handleGymClick(item._id)}>
+                    <Col key={item.id} onClick={() => handleGymClick(item.gSeq)}>
                         <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
                     </Col>
                 ))}
             </Row>
-
                 <Row style={{
                     marginTop: '20vh'
                 }}>
@@ -182,7 +144,7 @@ function Main() {
                     }}> 
                         <h1>COMMUNITY</h1>
                         <div>WORKOUT TOGETHER</div>
-                        <Btn style={{ border: '1px solid #C4C4C4', backgroundColor: 'white' }} >DETAIL</Btn></Col>
+                        <Btn style={{ border: '1px solid #C4C4C4', backgroundColor: 'white' }}>DETAIL</Btn></Col>
                 </Row>
                 <Row style={{
                     marginTop: '20vh'
