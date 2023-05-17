@@ -17,9 +17,11 @@ function PaymentBbs() {
   const [nickname, setNickname] = useState("");
   const history = useNavigate();
   const fetchData = async (user, p) => {
+    console.log(p);
+
     await axios
       .post("http://localhost:3000/getPaymentBbs", null, {
-        params: { buyer: user, pageNubmer: p },
+        params: { buyer: user, pageNumber: p },
       })
       .then(function (resp) {
         console.log(resp.data.list);
