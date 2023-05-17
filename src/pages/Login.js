@@ -17,6 +17,12 @@ function Login() {
   const [cookies, setCookies] = useCookies("");
   const [saveEmail, setSaveEmail] = useState(false);
 
+  const handleOnKeyPress = e => {
+    if (e.key === 'Enter') {
+      handleLogin(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   function CheckHandler() {
     setSaveEmail(!saveEmail);
     if (!saveEmail && email !== "") {
@@ -75,6 +81,7 @@ function Login() {
                   type="email"
                   placeholder="이메일을 입력하세요"
                   value={email}
+                  onKeyUp={handleOnKeyPress}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
@@ -83,6 +90,7 @@ function Login() {
                 <Form.Control
                   type="password"
                   placeholder="비밀번호를 입력하세요"
+                  onKeyUp={handleOnKeyPress}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>

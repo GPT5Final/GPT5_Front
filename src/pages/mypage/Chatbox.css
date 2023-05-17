@@ -41,7 +41,7 @@ a:hover {
 .wrapper, .loginform {
     margin: 0 auto;
     padding-bottom: 25px;        
-    width: 350px;
+    width: 500px;
     max-width: 100%;
     /* background: #976d89;     */
     /* border: 2px solid #212121; */
@@ -72,7 +72,7 @@ a:hover {
     margin-bottom: 15px;
     padding: 10px;    
     height: 500px;
-    width: 330px;       
+    width: 500px;       
     overflow: auto;
     /* background: #fff; */
     /* border: 1px solid #989898; */
