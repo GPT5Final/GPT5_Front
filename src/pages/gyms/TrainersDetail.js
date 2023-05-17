@@ -15,6 +15,17 @@ const TrainersDetail = () => {
   const [user, setUser] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
 
+  const removePTags = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const pTags = doc.getElementsByTagName("p");
+    for (let i = 0; i < pTags.length; i++) {
+      const pTag = pTags[i];
+      pTag.outerHTML = pTag.innerHTML; // <p> 태그를 제거하고 내용만 남깁니다
+    }
+    return doc.body.innerHTML;
+  }
+
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("login"));
     if (loggedInUser && loggedInUser.nickname) {
@@ -71,6 +82,8 @@ const TrainersDetail = () => {
       if (trainerData.isLiked !== undefined) {
         setIsLiked(trainerData.isLiked);
       }
+      // <p> 태그 제거
+      trainerData.content = removePTags(trainerData.content);
       setTrainer(trainerData);
       setLoading(false);
     } catch (error) {
@@ -112,44 +125,45 @@ const TrainersDetail = () => {
 
   return (
     <>
-      <Header />      
+      <Header />
       <div className={styles["detail-container"]}>
-        <img
-          className={styles["detail-image"]}
-          src={`http://localhost:3000/static/images/${trainer.newfilename}`}
-          alt={trainer.nickname}
-        />
+        {trainer.images.map((image, index) => (
+          <img
+            key={index}
+            className={styles["detail-image"]}
+            src={`http://localhost:3000/static/images/${image.newfilename}`}
+            alt={trainer.nickname}
+          />
+        ))}
         <div className={styles["detail-info"]}>
-          <div>
+          <div className={styles["detail-info-texts"]}>
             <div className={styles["detail-text"]}>이름: {trainer.title}</div>
-            <div className={styles["detail-text"]}>내용: {trainer.content}</div>
+            <div className={styles["detail-text"]}>경력: {trainer.content}</div>
           </div>
-          <div>
-            <div className={styles["detail-like"]}>
-              <button
-                onClick={handleLike}
-                className={`${styles["detail-button"]} ${styles["like-button"]}`}
-              >
-                {isLiked ? "💔좋아요취소" : "❤️좋아요"}
+          <div className={styles["detail-like"]}>
+            <button
+              onClick={handleLike}
+              className={`${styles["detail-button"]} ${styles["like-button"]}`}
+            >
+              {isLiked ? "💔좋아요취소" : "❤️좋아요"}
               <span>{trainer.love}</span>
+            </button>
+          </div>
+          {user && user.auth === 0 && (
+            <div className={styles["detail-buttons"]}>
+              <button onClick={handleUpdate} className={styles["detail-button"]}>
+                수정
+              </button>
+              <button onClick={handleDelete} className={styles["detail-button"]}>
+                삭제
               </button>
             </div>
-            {user && user.auth === 0 && (
-              <div className={styles["detail-buttons"]}>
-                <button onClick={handleUpdate} className={styles["detail-button"]}>
-                  수정
-                </button>
-                <button onClick={handleDelete} className={styles["detail-button"]}>
-                  삭제
-                </button>
-              </div>
-            )}
-          </div>
+          )}
         </div>
-      </div>     
+      </div>
       <Footer />
     </>
-    );
-  };
+  );
+};
 
 export default TrainersDetail;
