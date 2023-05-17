@@ -6,12 +6,12 @@ import { Footer } from '../../components/Footer';
 import styles from './TrainersDetail.module.css';
 
 
-const TrainersDetail = () => {
+const GymsDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  const [trainer, setTrainer] = useState(null);
+  const [gym, setGym] = useState(null);
   const [user, setUser] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -34,10 +34,10 @@ const TrainersDetail = () => {
   }, []);
 
   useEffect(() => {
-    if (trainer) {
-      setIsLiked(trainer.isLiked);
+    if (gym) {
+      setIsLiked(gym.isLiked);
     }
-  }, [trainer]);
+  }, [gym]);
 
   const handleLike = async () => {
     console.log("handleLike 함수 실행");
@@ -48,21 +48,21 @@ const TrainersDetail = () => {
     }
   
     const requestData = {
-      ptSeq: id,
+      gymSeq: id,
       nickname: user.nickname,
       isLiked: !isLiked,
     };
   
     try {
       console.log("axios.post called", requestData);
-      const response = await axios.post("http://localhost:3000/toggleLike", requestData, {
+      const response = await axios.post("http://localhost:3000/gtoggleLike", requestData, {
         headers: { 'Content-Type': 'application/json' },
       });
   
       if (response.status === 200) {
         const { success, updatedLikes } = response.data;
         if (success) {
-          setTrainer({ ...trainer, isLiked: !isLiked, love: updatedLikes });
+          setGym({ ...gym, isLiked: !isLiked, love: updatedLikes });
           setIsLiked(!isLiked);
           console.log("handleLike called");
         }
@@ -75,16 +75,16 @@ const TrainersDetail = () => {
     }
   };
 
-  const fetchTrainer = useCallback(async () => {
+  const fetchGym = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/getTrainer?seq=${id}`);
-      const trainerData = response.data;
-      if (trainerData.isLiked !== undefined) {
-        setIsLiked(trainerData.isLiked);
+      const response = await axios.get(`http://localhost:3000/getGym?gSeq=${id}`);
+      const gymData = response.data;
+      if (gymData.isLiked !== undefined) {
+        setIsLiked(gymData.isLiked);
       }
       // <p> 태그 제거
-      trainerData.content = removePTags(trainerData.content);
-      setTrainer(trainerData);
+      gymData.content = removePTags(gymData.content);
+      setGym(gymData);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -92,8 +92,8 @@ const TrainersDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    fetchTrainer();
-  }, [fetchTrainer]);
+    fetchGym();
+  }, [fetchGym]);
 
   // 수정
   const handleUpdate = () => {
@@ -101,7 +101,7 @@ const TrainersDetail = () => {
       alert("권한이 없습니다.");
       return;
     }
-    navigate('/TrainersUpdate', { state: { id } });
+    navigate('/GymsUpdate', { state: { id } });
   };
 
 
@@ -113,15 +113,15 @@ const TrainersDetail = () => {
     }
 
     try {
-      await axios.post(`http://localhost:3000/trainerdelete?seq=${id}`);
+      await axios.post(`http://localhost:3000/gymdelete?gSeq=${id}`);
       alert("삭제완료");
-      navigate('/trainers');
+      navigate('/gyms');
     } catch (error) {
       console.error(error);
     }
   };
 
-  if (!trainer) {
+  if (!gym) {
     return <div>Loading...</div>;
   }
 
@@ -129,18 +129,18 @@ const TrainersDetail = () => {
     <>
       <Header />
       <div className={styles["detail-container"]}>
-        {trainer.images.map((image, index) => (
+        {gym.images.map((image, index) => (
           <img
             key={index}
             className={styles["detail-image"]}
             src={`http://localhost:3000/static/images/${image.newfilename}`}
-            alt={trainer.nickname}
+            alt={gym.nickname}
           />
         ))}
         <div className={styles["detail-info"]}>
           <div className={styles["detail-info-texts"]}>
-            <div className={styles["detail-text"]}>이름: {trainer.title}</div>
-            <div className={styles["detail-text"]}>경력: {trainer.content}</div>
+            <div className={styles["detail-text"]}>이름: {gym.title}</div>
+            <div className={styles["detail-text"]}>경력: {gym.content}</div>
           </div>
           <div className={styles["detail-like"]}>
             <button
@@ -148,13 +148,13 @@ const TrainersDetail = () => {
               className={`${styles["detail-button"]} ${styles["like-button"]}`}
             >
               {isLiked ? "💔좋아요취소" : "❤️좋아요"}
-              <span>{trainer.love}</span>
+              <span>{gym.love}</span>
             </button>
           </div>
           {user && user.auth === 0 && (
             <div className={styles["detail-buttons"]}>
               {/* <button onClick={handleUpdate} className={styles["detail-button"]}> */}
-              <button onClick={() => handleUpdate(trainer.id)} className={styles["detail-button"]}>
+              <button onClick={() => handleUpdate(gym.id)} className={styles["detail-button"]}>
                 수정
               </button>
               <button onClick={handleDelete} className={styles["detail-button"]}>
@@ -169,4 +169,4 @@ const TrainersDetail = () => {
   );
 };
 
-export default TrainersDetail;
+export default GymsDetail;

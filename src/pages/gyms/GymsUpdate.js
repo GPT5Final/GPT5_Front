@@ -7,7 +7,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styles from './TrainersUpload.module.css';
 
-const TrainersUpdate = () => {
+const GymsUpdate = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [files, setFiles] = useState([]);
@@ -28,7 +28,7 @@ const TrainersUpdate = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/getTrainer?seq=${id}`)
+    axios.get(`http://localhost:3000/getGym?gSeq=${id}`)
       .then(res => {
         setTitle(res.data.title);
         setContent(res.data.content);
@@ -52,11 +52,20 @@ const TrainersUpdate = () => {
 
     // 여러 파일을 처리하기 위한 수정
     files.forEach((file, index) => {
-      formData.append(`file${index}`, file);
-    });  
+      formData.append(`file`, file);
+    });
     formData.append('nickname', nickname);
+
+    const gymsDto = {
+      title: title,
+      content: content,
+      nickname: nickname,      
+    };
+    const gymsDtoStr = JSON.stringify(gymsDto);
+
+    formData.append('gymsDto', gymsDtoStr);
   
-    axios.post("http://localhost:3000/trainerupdate", formData, {
+    axios.post("http://localhost:3000/gymupdate", formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -65,7 +74,7 @@ const TrainersUpdate = () => {
         console.log(res.data);
         if (res.data === "YES") {
           alert("수정됐습니다.");
-          navigate("/trainers");
+          navigate("/gyms");
         } else {
           alert("수정 실패했습니다.");
         }
@@ -149,4 +158,4 @@ const TrainersUpdate = () => {
   );
 };
 
-export default TrainersUpdate;
+export default GymsUpdate;

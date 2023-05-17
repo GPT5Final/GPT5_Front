@@ -10,10 +10,8 @@ import styles from './TrainersUpload.module.css';
 const TrainersUpload = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [file, setFile] = useState(null);
   const [files, setFiles] = useState([]);
   const quillRef = useRef();
-  // const [previewImage, setPreviewImage] = useState(null);
   const [previewImage, setPreviewImage] = useState([]); 
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
@@ -35,6 +33,7 @@ const TrainersUpload = () => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
+
     // 여러 파일을 처리하기 위한 수정
     files.forEach((file, index) => {
       formData.append(`file`, file);
@@ -54,19 +53,6 @@ const TrainersUpload = () => {
         alert(err);
       });
   };
-
-
-
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setFile(file);
-  //   // 이미지 미리보기 설정
-  //   const reader = new FileReader();
-  //   reader.onloadend = () => {
-  //     setPreviewImage(reader.result);
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
   
   const handleImageChange = (e) => {
     const files = e.target.files;
@@ -118,7 +104,7 @@ const TrainersUpload = () => {
                 <img
                   src={image}
                   alt="preview"
-                  onClick={() => handlePreviewImageClick(index)} // 이벤트 추가
+                  onClick={() => handlePreviewImageClick(index)}
                 />
               </div>
             ))
@@ -126,7 +112,7 @@ const TrainersUpload = () => {
                 
           <label className={styles['upload-label']}></label>
           <ReactQuill
-            ref={quillRef} // ref 추가
+            ref={quillRef}
             value={content}
             onChange={(e) => setContent(e)}
             className={`${styles['upload-textarea']} ${styles['upload-quill']}`}

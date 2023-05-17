@@ -54,3 +54,10 @@
     height: 100%;
     margin: 0 auto;
 }
+.Link1{
+    color: black;
+    text-decoration: none;
+    text-decoration-style: solid;
+    text-underline-offset: underline;
+    text-decoration-skip-ink: underline;
+}
