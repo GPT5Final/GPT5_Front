@@ -16,6 +16,7 @@ function PayBbs() {
 
   const [nickname, setNickname] = useState("");
   const history = useNavigate();
+
   const fetchData = async (user, p) => {
     await axios
       .post("http://localhost:3000/getChargeBbs", null, {

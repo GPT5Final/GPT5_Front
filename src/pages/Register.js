@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -29,37 +29,37 @@ function Register() {
     const selectedFile = event.target.files[0];
     setImage(selectedFile);
     setPreviewUrl(URL.createObjectURL(selectedFile));
-}
+  };
 
-const handleClick = () => {
+  const handleClick = () => {
     fileInputRef.current.click();
-};
+  };
 
-const deleteClick = () => {
+  const deleteClick = () => {
     setPreviewUrl(null);
     setImage(null);
-}
+  };
   function account(e) {
     e.preventDefault();
 
-    if (email === "" || email.length < 0) {
+    if (email === "" || email.length <= 0) {
       alert("아이디를 입력하세요");
       return;
-    } else if (pwd === "" || pwd.length < 0) {
+    } else if (pwd === "" || pwd.length <= 0) {
       alert("비밀번호를 입력하세요");
       return;
-    } else if (nickname === "" || nickname.length < 0) {
+    } else if (nickname === "" || nickname.length <= 0) {
       alert("별명을 입력하세요");
       return;
     } else if (name === "" || name.length < 0) {
       alert("이름을 입력하세요");
-    } else if (emailKey === "" || emailKey.length < 0) {
+    } else if (emailKey === "" || emailKey.length <= 0) {
       alert("이메일인증코드 입력칸을 확인하세요");
-    } else if (contact === "" || contact.length < 0) {
+    } else if (contact === "" || contact.length <= 0) {
       alert("연락처를 입력하세요");
-    } else if (birth === "" || birth.length < 0) {
+    } else if (birth === "" || birth.length <= 0) {
       alert("생년월일을 선택해 주세요");
-    } else if (gender === "" || gender.length < 0) {
+    } else if (gender === "" || gender.length <= 0) {
       alert("성별을 선택해 주세요");
     }
 
@@ -69,16 +69,16 @@ const deleteClick = () => {
       })
       .then(function (resp) {
         if (resp.data === "YES") {
-            const formData = new FormData();
-            formData.append("email", email);
-            formData.append("pwd", pwd);
-            formData.append("nickname", nickname);
-            formData.append("gender", gender);
-            formData.append("name", name);
-            formData.append("birth", birth);
-            formData.append("contact", contact);
-            formData.append("profile", profile);
-            formData.append("image", image);
+          const formData = new FormData();
+          formData.append("email", email);
+          formData.append("pwd", pwd);
+          formData.append("nickname", nickname);
+          formData.append("gender", gender);
+          formData.append("name", name);
+          formData.append("birth", birth);
+          formData.append("contact", contact);
+          formData.append("profile", profile);
+          formData.append("image", image);
           axios
             .post("http://localhost:3000/addmember", formData)
             .then(function (resp) {
@@ -248,38 +248,40 @@ const deleteClick = () => {
                   placeholder="전화번호를 입력하세요"
                 />
                 <Form.Group className="mb-3">
-              <div className='edit-form-content'>
-                            {previewUrl ? (
-                                <div>
-                                    <img src={previewUrl}
-                                         alt="프로필 이미지"
-                                         onClick={handleClick}
-                                         style={{cursor: "pointer"}}
-                                         width="130"
-                                         height="130"
-                                    /><br/>
-                                    <button onClick={deleteClick}>삭제</button>
-                                </div>
-                            ) : (
-                                <div>
-                                    <img
-                                        src={`http://localhost:3000/${profile}`}
-                                        alt="프로필 이미지"
-                                        onClick={handleClick}
-                                        style={{cursor: "pointer"}}
-                                        width="130"
-                                        height="130"
-                                    />
-                                </div>
-                            )}
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                onChange={handleImageChange}
-                                style={{display: "none"}}
-                            />
-                        </div>             
-              </Form.Group>
+                  <div className="edit-form-content">
+                    {previewUrl ? (
+                      <div>
+                        <img
+                          src={previewUrl}
+                          alt="프로필 이미지"
+                          onClick={handleClick}
+                          style={{ cursor: "pointer" }}
+                          width="130"
+                          height="130"
+                        />
+                        <br />
+                        <button onClick={deleteClick}>삭제</button>
+                      </div>
+                    ) : (
+                      <div>
+                        <img
+                          src={`http://localhost:3000/${profile}`}
+                          alt="프로필 이미지"
+                          onClick={handleClick}
+                          style={{ cursor: "pointer" }}
+                          width="130"
+                          height="130"
+                        />
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleImageChange}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                </Form.Group>
               </Form.Group>
               <Button
                 variant="primary"

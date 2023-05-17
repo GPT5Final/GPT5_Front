@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Footer } from '../../components/Footer';
 import Header from '../../components/Header';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styles from './TrainersUpload.module.css';
 
-const TrainersUpload = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [files, setFiles] = useState([]);
-  const quillRef = useRef();
-  const [previewImage, setPreviewImage] = useState([]); 
-  const [nickname, setNickname] = useState('');
-  const navigate = useNavigate();
+const TrainersUpdate = () => {
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [files, setFiles] = useState([]);
+    const [images, setImages] = useState([]);
+    const quillRef = useRef();
+    const [previewImage, setPreviewImage] = useState([]); 
+    const [nickname, setNickname] = useState('');
+    const navigate = useNavigate();
+
+    const location = useLocation();
+    const id = location.state.id;
 
   useEffect(() => {
     const logInUser = JSON.parse(localStorage.getItem("login"));
@@ -22,6 +26,18 @@ const TrainersUpload = () => {
       setNickname(logInUser.nickname);
     }
   }, []);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/getTrainer?seq=${id}`)
+      .then(res => {
+        setTitle(res.data.title);
+        setContent(res.data.content);
+        setImages(res.data.images);  
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,18 +52,22 @@ const TrainersUpload = () => {
 
     // 여러 파일을 처리하기 위한 수정
     files.forEach((file, index) => {
-      formData.append(`file`, file);
-    });
+      formData.append(`file${index}`, file);
+    });  
     formData.append('nickname', nickname);
   
-    axios.post("http://localhost:3000/trainerwrite", formData)
+    axios.post("http://localhost:3000/trainerupdate", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
       .then(res => {
         console.log(res.data);
         if (res.data === "YES") {
-          alert("등록됐습니다.");
+          alert("수정됐습니다.");
           navigate("/trainers");
         } else {
-          alert("등록에 실패했습니다.");
+          alert("수정 실패했습니다.");
         }
       }).catch(function (err) {
         alert(err);
@@ -58,7 +78,7 @@ const TrainersUpload = () => {
     const files = e.target.files;
     const fileArray = Array.from(files);
     setFiles(prev => [...prev, ...fileArray]);
-    // 이미지 미리보기 설정
+  
     fileArray.forEach(file => {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -99,16 +119,17 @@ const TrainersUpload = () => {
             multiple
           />
           {
-            previewImage && previewImage.map((image, index) => (
-              <div className={styles['image-preview']} key={index}>
+            images &&
+            images.map((image, index) => (
+                <div className={styles['image-preview']} key={index}>
                 <img
-                  src={image}
-                  alt="preview"
-                  onClick={() => handlePreviewImageClick(index)}
+                    src={previewImage[index]}
+                    alt="preview"
+                    onClick={() => handlePreviewImageClick(index)}
                 />
-              </div>
+                </div>
             ))
-          }
+            }
                 
           <label className={styles['upload-label']}></label>
           <ReactQuill
@@ -119,7 +140,7 @@ const TrainersUpload = () => {
             theme="snow"
           />
           <br/>
-          <button type="submit" className={styles['upload-submit']}>글 작성</button>
+          <button type="submit" className={styles['upload-submit']}> 수정 </button>
               </form>
           
             </div>
@@ -128,4 +149,4 @@ const TrainersUpload = () => {
   );
 };
 
-export default TrainersUpload;
+export default TrainersUpdate;

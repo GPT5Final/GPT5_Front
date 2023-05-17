@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Gyms from "./pages/gyms/Gyms";
+import GymsUpload from "./pages/gyms/GymsUpload";
+import GymsUpdate from "./pages/gyms/GymsUpdate";
+import GymsDetail from "./pages/gyms/GymsDetail";
 import Stretching from "./pages/Stretching";
 import Home from "./pages/community/Home";
 import MyGroup from "./pages/community/MyGroup";
@@ -29,7 +32,11 @@ import Charge from "./pages/pay/Charge";
 import PayCoin from "./pages/pay/payCoin";
 import Trainers from "./pages/gyms/Trainers";
 import TrainersUpload from "./pages/gyms/TrainersUpload";
+import TrainersUpdate from "./pages/gyms/TrainersUpdate";
 import TrainersDetail from "./pages/gyms/TrainersDetail";
+import Inquiry from "./pages/inquiry/inquiry";
+import InqWrite from "./pages/inquiry/inqWrite";
+import InquiryDetail from "./pages/inquiry/inquiryDetail";
 
 const Router = () => {
   return (
@@ -43,9 +50,19 @@ const Router = () => {
         <Route path="/mypagegroup" element={<Mypagegroup />} />
         <Route path="/mypageleave" element={<Mypageleave />} />
         <Route path="/mypagereference" element={<Mypagereference />} />
+        <Route path="/Inquiry" element={<Inquiry />} />
+        <Route
+          path="/Inquiry/:choice/:search/:nickname"
+          element={<Inquiry />}
+        />
+        <Route path="/InquiryDetail/:seq" element={<InquiryDetail />} />
+        <Route path="/InqWrite" element={<InqWrite />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/gyms" element={<Gyms />} />
+        <Route path="/gymsupload" element={<GymsUpload />} />
+        <Route path="/gymsupdate" element={<GymsUpdate />} />
+        <Route path="/gym/:id" element={<GymsDetail />} />
         <Route path="/charge" element={<Charge />} />
         <Route path="/community/Home" element={<Home />} />
         <Route path="/community/MyGroup" element={<MyGroup />} />
@@ -60,6 +77,7 @@ const Router = () => {
         <Route path="/payCoin" element={<PayCoin />} />
         <Route path="/trainers" element={<Trainers />} />
         <Route path="/trainersupload" element={<TrainersUpload />} />
+        <Route path="/trainersupdate" element={<TrainersUpdate />} />
         <Route path="/trainer/:id" element={<TrainersDetail />} />
         <Route path="/guide" element={<Guide />} />
         <Route path="/exercise" element={<Exercise />} />
