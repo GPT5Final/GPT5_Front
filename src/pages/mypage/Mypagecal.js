@@ -68,7 +68,15 @@ function Mypagecal(){
                 droppable="true"
                 locale="ko"
                 dateClick={handleDateClick}
-                eventContent={renderEventContent}
+                events={[
+                    { title: '푸쉬업 30회', date: '2023-05-02' },
+                    { title: '스쿼트 50회', date: '2023-05-08' },
+                    { title: '풀업 10회', date: '2023-05-12' },
+                    { title: '러닝 1시간', date: '2023-05-10' },
+                    { title: '푸쉬업 30회', date: '2023-05-15' },
+                    { title: '스쿼트 50회', date: '2023-05-16' },
+                    { title: '풀업 11회', date: '2023-05-17' }
+                ]}
             />
             <>
                 <Button variant="primary" onClick={handleShow}>

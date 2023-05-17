@@ -138,9 +138,15 @@ function InqWrite() {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     <option>문의 유형을 선택해 주십시오.</option>
-                    <option value="문의유형1">One</option>
-                    <option value="문의유형2">Two</option>
-                    <option value="문의유형3">Three</option>
+                    <option value="제휴 헬스장">제휴 헬스장</option>
+                    <option value="트레이너">트레이너</option>
+                    <option value="멘토">멘토</option>
+                    <option value="멘티">멘티</option>
+                    <option value="코인">코인</option>
+                    <option value="그룹">그룹</option>
+                    <option value="스트레칭">스트레칭</option>
+                    <option value="식단">식단</option>
+                    <option value="그 밖의 문의사항">그 밖의 문의사항</option>
                   </Form.Select>
                   <br />
 

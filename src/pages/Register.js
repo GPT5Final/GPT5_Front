@@ -265,7 +265,7 @@ function Register() {
                     ) : (
                       <div>
                         <img
-                          src={`http://localhost:3000/${profile}`}
+                          src={`http://localhost:3000/images/${profile}`}
                           alt="프로필 이미지"
                           onClick={handleClick}
                           style={{ cursor: "pointer" }}

@@ -84,6 +84,15 @@ function Main() {
     const handleGymClick = (id) => {
         history(`/gym/${id}`);
     };
+    const handleCommunityClick = () => {
+        history('/community/Home');
+    };
+    const handleGuideClick = () => {
+        history('/Guide');
+    };
+    const handleInquiryClick =() => {
+        history('/inquiry');
+    }
 
     return (
         <>
@@ -108,11 +117,11 @@ function Main() {
                             marginTop: '10px',
 
                         }}>
-                            <Btn>개인상담</Btn>
-                            <Btn style={{
-                                marginLeft: '30px',
+                            
+                            <Btn onClick={handleInquiryClick} style={{
+                                
                                 backgroundColor: '#D9D9D9'
-                            }}>제휴상담</Btn>
+                            }}>문의하기</Btn>
                         </div>
                     </Col>
                     <Col>
@@ -159,7 +168,7 @@ function Main() {
                     }}> 
                         <h1>COMMUNITY</h1>
                         <div>WORKOUT TOGETHER</div>
-                        <Btn style={{ border: '1px solid #C4C4C4', backgroundColor: 'white' }}>DETAIL</Btn></Col>
+                        <Btn onClick={handleCommunityClick} style={{ border: '1px solid #C4C4C4', backgroundColor: 'white' }}>DETAIL</Btn></Col>
                 </Row>
                 <Row style={{
                     marginTop: '20vh'
@@ -172,7 +181,7 @@ function Main() {
                     }}>
                         <h1>GUIDE</h1>
                         <div>EVERY INFORMATION YOU NEED TO WORKOUT</div>
-                        <Btn style={{ border: '1px solid #C4C4C4', backgroundColor: 'white' }}>DETAIL</Btn>
+                        <Btn onClick={handleGuideClick} style={{ border: '1px solid #C4C4C4', backgroundColor: 'white' }}>DETAIL</Btn>
                     </Col>
                     <Col sm={8}><img src="./me.jpg" style={{ width: '500px' }} /></Col>
                 </Row>
