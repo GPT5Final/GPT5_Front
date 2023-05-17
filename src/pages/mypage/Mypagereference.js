@@ -162,7 +162,7 @@ function Mypagereference(){
                 <div>
                     <p>{status}</p>
 
-                    <input type="text" className="usermsgwrite" 
+                    <input type="text" className="usermsgwrite" style={{width:'360px'}}
                     value={umessage} onChange={(e)=>setUmessage(e.target.value)} placeholder={resp} onKeyPress={handleOnKeyPress} />
 
                     <Link><img src="../mic.png" alt="mic" style={{ width: '30px', height : '30px' }} onClick={startRecording} ></img></Link>
@@ -181,18 +181,8 @@ function Mypagereference(){
             />
 
             <hr/>
-        </div><br/><br/><br/>
-                <h3>원하는 내용을 찾을 수 없으셨나요 ?</h3>
-                <p>어떠한 내용이라도 답변드릴 준비가 되어있습니다 !</p>
-                <p>문의를 보내주세요 !</p>
-                <p>최대한 빨리 답변해 드리겠습니다 !</p>
-                <Form.Select aria-label="Default select example">
-                <option>문의하기</option>
-                <option value="1">헬스장</option>
-                <option value="2">트레이너</option>
-                <option value="3">코인</option>
-            </Form.Select>
-            <Button type="button">전송</Button>
+        </div>
+                
             </Container>
         </div>
     )
