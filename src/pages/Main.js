@@ -17,7 +17,10 @@ const Btn = styled.button`
     background-color: #C4C4C4;
     border-style: none;
     width: 100px;
-    height: 40px;
+    height: 40px;    
+`;
+const Box = styled.div`
+    cursor: pointer;
 `;
 
 function Main() {
@@ -74,6 +77,10 @@ function Main() {
         fetchGyms();
     }, [nickname]);
 
+    const handleGymsClick = () => {
+        history('/gyms');
+    };    
+
     const handleGymClick = (id) => {
         history(`/gym/${id}`);
     };
@@ -118,20 +125,28 @@ function Main() {
                         />
                     </Col>
                 </Row>
+                
+                <Row style={{
+                textAlign: 'center',
+                marginTop: '8vh'
+                }}>
+                <Col onClick={handleGymsClick}><h1>GYMS</h1></Col>
+                </Row>
+                
                 <Row style={{ textAlign: 'center', marginTop: '8vh' }}>
-                {carouselItems.slice(0, 3).map(item => (
-                    <Col key={item.id} onClick={() => handleGymClick(item.gSeq)}>
-                        <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
-                    </Col>
-                ))}
-            </Row>
-            <Row style={{ textAlign: 'center', marginTop: '8vh' }}>
-                {carouselItems.slice(3, 6).map(item => (
-                    <Col key={item.id} onClick={() => handleGymClick(item.gSeq)}>
-                        <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
-                    </Col>
-                ))}
-            </Row>
+                    {carouselItems.slice(0, 3).map(item => (
+                        <Col key={item.id} onClick={() => handleGymClick(item.gSeq)}>
+                            <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
+                        </Col>
+                    ))}
+                </Row>
+                <Row style={{ textAlign: 'center', marginTop: '8vh' }}>
+                    {carouselItems.slice(3, 6).map(item => (
+                        <Col key={item.id} onClick={() => handleGymClick(item.gSeq)}>
+                            <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
+                        </Col>
+                    ))}
+                </Row>               
                 <Row style={{
                     marginTop: '20vh'
                 }}>
