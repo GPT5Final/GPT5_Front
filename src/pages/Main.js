@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Carousel from 'react-bootstrap/Carousel';
 import { Footer } from '../components/Footer';
+import axiosInstance from '../axiosInstance';
 
 const Btn = styled.button`
     border-top-left-radius: 15px;
@@ -18,6 +21,67 @@ const Btn = styled.button`
 `;
 
 function Main() {
+    const history = useNavigate();
+    const [carouselItems, setCarouselItems] = useState([]);
+    const [logIn, setLogIn] = useState(false);
+    const [nickname, setNickname] = useState("");
+    const [userAuth, setUserAuth] = useState(null);
+
+    useEffect(() => {
+        const logInUser = JSON.parse(localStorage.getItem("login"));
+        if (logInUser && logInUser.nickname) {
+            setLogIn(true);
+            setNickname(logInUser.nickname);
+            setUserAuth(logInUser.auth);
+        }
+    }, []);
+
+    const removePTags = (html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const pTags = doc.getElementsByTagName("p");
+        for (let i = 0; i < pTags.length; i++) {
+            const pTag = pTags[i];
+            pTag.outerHTML = pTag.innerHTML;
+        }
+        return doc.body.innerHTML;
+        }
+
+    useEffect(() => {
+        const fetchGyms = async () => {
+        try {
+            const response = await axiosInstance.get("/gymslist", {
+            params: {
+                nickname: nickname,
+            },
+            });
+
+            console.log(response.data)
+            setCarouselItems(
+            response.data.gyms.map((gym) => ({
+                ...gym,
+                content: removePTags(gym.content),
+                isLiked: false,
+            }))
+                .sort((a, b) => b.love - a.love)
+            );
+            console.log(response.data.gyms);
+        } catch (error) {
+            console.error("GYM 데이터를 가져오는데 실패했습니다.", error);
+        }
+        };
+
+        fetchGyms();
+    }, [nickname]);
+
+    const handleGymClick = (id) => {
+        history(`/gym/${id}`);
+    };
+
+    const handleGymsClick = () => {
+        history('/gyms');
+    };
+
     return (
         <>
             <Header />
@@ -58,28 +122,20 @@ function Main() {
                         />
                     </Col>
                 </Row>
-                <Row style={{
-                    textAlign: 'center',
-                    marginTop: '8vh'
-                }}>
-                    <Col><h1>GYMS</h1></Col>
-                </Row>
-                <Row style={{
-                    textAlign: 'center',
-                    marginTop: '8vh'
-                }}>
-                    <Col><img src="./jamsil1.png" style={{ width: '230px', height: '' }} /></Col>
-                    <Col><img src="./chanwon.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./jeju.png" style={{ width: '230px' }} /></Col>
-                </Row>
-                <Row style={{
-                    textAlign: 'center',
-                    marginTop: '8vh'
-                }}>
-                    <Col><img src="./incheon.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./hanam.png" style={{ width: '230px' }} /></Col>
-                    <Col><img src="./anyang.png" style={{ width: '230px' }} /></Col>
-                </Row>
+                <Row style={{ textAlign: 'center', marginTop: '8vh' }}>
+                {carouselItems.slice(0, 3).map(item => (
+                    <Col key={item._id} onClick={() => handleGymClick(item._id)}>
+                        <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
+                    </Col>
+                ))}
+            </Row>
+            <Row style={{ textAlign: 'center', marginTop: '8vh' }}>
+                {carouselItems.slice(3, 6).map(item => (
+                    <Col key={item._id} onClick={() => handleGymClick(item._id)}>
+                        <img src={`http://localhost:3000/static/images/${item.firstImage.newfilename}`} style={{ width: '230px', height: '' }} />
+                    </Col>
+                ))}
+            </Row>
                 <Row style={{
                     marginTop: '20vh'
                 }}>

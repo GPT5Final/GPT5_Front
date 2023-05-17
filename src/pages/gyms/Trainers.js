@@ -108,10 +108,12 @@ const Trainers = () => {
           response.data.trainers.map((trainer) => ({
             ...trainer,
             content: removePTags(trainer.content), // <p> 태그 제거
-            isLiked: false, // 초기 상태를 false로 설정
+            isLiked: false,
             }))
             .sort((a, b) => b.love - a.love) // 좋아요(love) 수를 기반으로 내림차순 정렬            
           );
+          console.log(response.data)
+          // console.log(response.data.trainer.trainers);
         } catch (error) {
         console.error("트레이너 데이터를 가져오는데 실패했습니다.", error);
         }
@@ -133,7 +135,7 @@ const Trainers = () => {
   
     try {
       const requestData = {
-        pt_seq: id,
+        ptSeq: id,
         nickname: nickname,
         isLiked: !isLiked,
       };
