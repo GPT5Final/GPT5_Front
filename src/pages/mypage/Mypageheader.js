@@ -3,6 +3,7 @@ import { Container, ListGroup, Card, Button } from "react-bootstrap";
 import "./Mypage.css";
 import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
+import './Mypageheader.css';
 
 function Mypageheader() {
   const [email, setEmail] = useState("");
@@ -126,7 +127,7 @@ function Mypageheader() {
           <p align="center">{email}</p>
           <p align="center">
             보유코인 : {coin} coin{" "}
-            <Button variant="dark" size="sm" onClick={coinBtn}>
+            <Button variant="dark" size="sm" onClick={chargeBtn}>
               충전
             </Button>
           </p>
@@ -134,22 +135,22 @@ function Mypageheader() {
         <Card className="left_card" style={{ width: "18rem", border: "none" }}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <Link to="/Mypage">내 프로필</Link>
+              <Link to="/Mypage" style={{ color: "black", textDecoration:"none"}}>내 프로필</Link>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Link to="/Mypagecal">운동 일정</Link>
+              <Link to="/Mypagecal" style={{ color: "black", textDecoration:"none"}}>운동 일정</Link>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Link to="/Mypagegroup">나의 그룹</Link>
+              <Link to="/Mypagegroup" className="Link1">나의 그룹</Link>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Link to="/ChargeBbs">코인 충전 내역</Link>
+              <Link to="/ChargeBbs" style={{ color: "black", textDecoration:"none"}}>코인 충전 내역</Link>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Link to="/PaymentBbs">코인 결제 내역</Link>
+              <Link to="/PaymentBbs" style={{ color: "black", textDecoration:"none" }}>코인 결제 내역</Link>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Link to="/Mypagereference">문의 하기</Link>
+              <Link to="/Mypagereference" style={{ color: "black", textDecoration:"none"}}>문의 하기</Link>
             </ListGroup.Item>
           </ListGroup>
         </Card>
@@ -159,7 +160,7 @@ function Mypageheader() {
         <Card className="left_card" style={{ width: "18rem", border: "none" }}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <Link to="/Mypageleave">회원 탈퇴</Link>
+              <Link to="/Mypageleave" style={{ color: "black", textDecoration:"none"}}>회원 탈퇴</Link>
             </ListGroup.Item>
           </ListGroup>
         </Card>

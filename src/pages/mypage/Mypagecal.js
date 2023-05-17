@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Mypageheader from './Mypageheader';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
@@ -15,8 +15,6 @@ function Mypagecal(){
     const [event, setEvent] = useState('');
     const [dateandtime, setDateandtime] = useState('');
     
-    
-
     const TokenEmail = localStorage.getItem("email");
     const token = { email: TokenEmail };
 
@@ -32,8 +30,15 @@ function Mypagecal(){
         });
     }, [])
 
-    function calHandler() {
-        
+     async function calHandler() {
+        axios.post("http://localhost:3000/addcal", null, {params:{email:email, event:event, dateandtime:dateandtime}})
+        .then((resp) =>{
+            let men = JSON.stringify(resp.data);
+            alert(men);
+        })
+        .catch((err) => {
+            alert(err);
+        });
     }
 
     const [show, setShow] = useState(false);
@@ -60,6 +65,7 @@ function Mypagecal(){
             <div className="cal_box" >
             <FullCalendar
                 plugins={[ dayGridPlugin, interactionPlugin ]}
+                droppable="true"
                 locale="ko"
                 dateClick={handleDateClick}
                 eventContent={renderEventContent}
@@ -78,7 +84,7 @@ function Mypagecal(){
                         <Form.Label>날짜선택</Form.Label>
                         <Form.Control type="date"/>
                     </Form.Group>
-                        <input type='text' placeholder={email}></input>
+                        <input type='text' placeholder="일정"></input>
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
