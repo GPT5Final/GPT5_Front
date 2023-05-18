@@ -19,7 +19,7 @@ function MyGroup() {
     return (
         <>
             <Header />
-            <Container style={{ border: '1px solid', float: 'center' }}>
+            <Container style={{ float: 'center', height: '770px' }}>
                 <CommunityMenu />
                 <Row>
                     <Col style={{ float: 'left' }}>
