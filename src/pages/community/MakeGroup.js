@@ -10,9 +10,8 @@ import { Footer } from '../../components/Footer';
 import CommunityMenu from '../../components/CommunityMenu';
 import CommunityBanner from '../../components/CommunityBanner';
 // import LandingPage from '../../components/LandingPage';
-import MapContainer from '../../components/MapContainer'
-// import DraftEditor from './DraftEditor';
-// import { Map } from 'react-kakao-maps-sdk'
+import MapContainer from '../../components/MapContainer';
+
 
 
 const BtnOne = styled.button`
@@ -24,14 +23,6 @@ const BtnOne = styled.button`
     height: 40px;
 `;
 
-const BtnTwo = styled.button`
-    border-top-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    width: 150px;
-    height: 40px;
-`;
 
 const GymInfo = styled.div`
 width: 800px;
@@ -57,15 +48,6 @@ const GymInfoTwo = styled.div`
 
 `;
 
-const AdGroup = styled.div`
-    border: 1px solid black;
-    border-radius: 15px;
-    text-align: center;
-    background-color: white;
-    margin-top: 20px;
-    height: 100px;
-    font-size: 15px;
-`;
 
 const Chat = styled.div`
     margin: 0 auto;
@@ -80,12 +62,14 @@ const Chat = styled.div`
 `;
 
 
-
 function MakeGroup() {
+    const navigate = useNavigate();
     let history = useNavigate();
 
     const [email, setEmail] = useState('');
     const [nickname, setNickname] = useState('');
+    const [memail, setMemail] = useState('');
+    const [mnickname, setMnickname] = useState('');
     const [groupname, setGroupname] = useState('');
     const [career, setCareer] = useState('');
     const [stime, setStime] = useState('');
@@ -105,7 +89,7 @@ function MakeGroup() {
     const handleSubmit = (e) => {
         e.preventDefault()
         setPlace(location)
-        setLocation('')
+        setLocation(location)
     }
 
 
@@ -164,10 +148,8 @@ function MakeGroup() {
         }
 
 
-
-
         axios.post("http://localhost:3000/Communitywrite", null,
-            { params: { "email": email, "nickname": nickname, "groupname": groupname, "career": career, "stime": stime, "etime": etime, "category": category, "banner": banner, "price": price, "location": location, "title": title, "content": content, "tag1": tag1, "tag2": tag2, "tag3": tag3, } })
+            { params: { "email": email, "nickname": nickname, "memail": memail, "mnickname": mnickname, "groupname": groupname, "career": career, "stime": stime, "etime": etime, "category": category, "banner": banner, "price": price, "location": location, "title": title, "content": content, "tag1": tag1, "tag2": tag2, "tag3": tag3, } })
             .then(res => {
                 console.log(res.data);
                 if (res.data === "YES") {
@@ -180,7 +162,9 @@ function MakeGroup() {
             .catch(function (err) {
                 alert(err);
             })
+
     }
+
 
     useEffect(function () {
         let login = JSON.parse(localStorage.getItem("login"));
@@ -188,10 +172,11 @@ function MakeGroup() {
         setNickname(login.nickname);
     }, []);
 
+
     return (
         <>
             <Header />
-            <Container style={{ border: '1px solid', float: 'center', marginTop: '5vh' }}>
+            <Container style={{ float: 'center' }}>
                 <CommunityMenu />
                 <Row>
                     <Col style={{ float: 'left' }}>
@@ -315,7 +300,6 @@ function MakeGroup() {
                                                     <option value="">카테고리 선택</option>
                                                     <option value="인증멘토">인증 멘토 찾기</option>
                                                     <option value="멘토&멘티">멘토&멘티 찾기</option>
-                                                    <option value="같이운동해요">같이 운동해요</option>
                                                 </select>
                                             </div>
                                             <div style={{ display: 'flex', marginLeft: '44px' }}>
@@ -335,7 +319,7 @@ function MakeGroup() {
                                     <div className="map" style={{ display: 'flex' }}>
                                         <div style={{ marginTop: '15px', marginRight: '30px' }}>
                                             <form className="inputForm" onSubmit={handleSubmit}>
-                                                장소<input placeholder="장소를 입력하세요" value={location} onChange={(e) => setLocation(e.target.value)} style={{ border: 'solid 1px', marginLeft: '5px', width: '265px' }} />
+                                                장소<input placeholder="도로명주소 입력 ex)테헤란로 212" value={location} onChange={(e) => setLocation(e.target.value)} style={{ border: 'solid 1px', marginLeft: '5px', width: '265px' }} />
                                                 <button type="submit" style={{ border: 'solid 1px' }}>검색</button>
                                             </form>
                                             <MapContainer searchPlace={Place} />
@@ -345,12 +329,7 @@ function MakeGroup() {
                             </div>
                         </GymInfo>
                         <GymInfoTwo style={{ marginTop: '10px' }}>
-                            <div style={{ marginTop: '10px' }}>
-                                <textarea value={title} placeholder="제목" type="text" onChange={(e) => setTitle(e.target.value)} style={{ marginLeft: '20px', height: '30px', width: '720px' }} />
-                                <textarea value={content} placeholder="내용" type="text" onChange={(e) => setContent(e.target.value)} style={{ marginTop: '15px', marginLeft: '20px', height: '250px', width: '720px' }} />
-                            </div>
-                            {/* <DraftEditor /> */}
-                            <div style={{ display: 'flex', marginTop: '30px', marginLeft: '100px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                                 <div style={{ display: 'flex' }} >
                                     <div>실력</div>
                                     <select className="tag1" onChange={(e) => setTag1(e.target.value)} style={{ borderRadius: '5px', marginLeft: '10px' }}>
@@ -360,7 +339,7 @@ function MakeGroup() {
                                         <option value="고수">고수</option>
                                     </select>
                                 </div>
-                                <div style={{ display: 'flex' }} >
+                                <div style={{ display: 'flex', marginLeft: '10px' }} >
                                     <div>분위기</div>
                                     <select className="tag2" onChange={(e) => setTag2(e.target.value)} style={{ borderRadius: '5px', marginLeft: '10px' }}>
                                         <option value="">선택</option>
@@ -369,7 +348,7 @@ function MakeGroup() {
                                         <option value="쉬엄쉬엄">쉬엄쉬엄</option>
                                     </select>
                                 </div>
-                                <div style={{ display: 'flex' }} >
+                                <div style={{ display: 'flex', marginLeft: '10px' }} >
                                     <div>스타일</div>
                                     <select className="tag3" onChange={(e) => setTag3(e.target.value)} style={{ borderRadius: '5px', marginLeft: '10px' }}>
                                         <option value="">선택</option>
@@ -379,7 +358,17 @@ function MakeGroup() {
                                     </select>
                                 </div>
                             </div>
-                            <div style={{ float: 'right', marginTop: '20px', marginRight: '40px' }}><BtnOne type="button" onClick={() => Communitywrite()}>생성하기</BtnOne></div>
+                            <div style={{ marginTop: '10px' }}>
+                                <textarea value={title} placeholder="제목" type="text" onChange={(e) => setTitle(e.target.value)} style={{ marginTop: '15px', marginLeft: '20px', height: '30px', width: '720px' }} />
+                                <textarea value={content} placeholder="내용" type="text" onChange={(e) => setContent(e.target.value)} style={{ marginTop: '15px', marginLeft: '20px', height: '250px', width: '720px' }} />
+                            </div>
+                            {/* <DraftEditor /> */}
+                            <button style={{ float: 'left', marginLeft: '40px' }} onClick={() => navigate(-1)}>
+                                목록
+                            </button>
+                            <div style={{ float: 'right', marginRight: '40px' }}>
+                                <BtnOne type="button" onClick={() => { Communitywrite(); }}>생성하기</BtnOne>
+                            </div>
                         </GymInfoTwo>
                     </Col>
                     <CommunityBanner />

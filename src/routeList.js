@@ -11,7 +11,9 @@ import MyGroup from "./pages/community/MyGroup";
 import PartnerMentor from "./pages/community/PartnerMentor";
 import MentorMentee from "./pages/community/MentorMentee";
 import ExerciseTalk from "./pages/community/ExerciseTalk";
+import ExerciseTalkWrite from "./pages/community/ExerciseTalkWrite";
 import MakeGroup from "./pages/community/MakeGroup";
+import CommunityDetail from "./pages/community/CommunityDetail";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -69,7 +71,9 @@ const Router = () => {
         <Route path="/community/PartnerMentor" element={<PartnerMentor />} />
         <Route path="/community/MentorMentee" element={<MentorMentee />} />
         <Route path="/community/ExerciseTalk" element={<ExerciseTalk />} />
+        <Route path="/community/ExerciseTalkWrite" element={<ExerciseTalkWrite />} />
         <Route path="/community/MakeGroup" element={<MakeGroup />} />
+        <Route path="/CommunityDetail/:id" element={<CommunityDetail />} />
         <Route path="/stretching" element={<Stretching />} />
         <Route path="/information" element={<Information />} />
         <Route path="/ChargeBbs" element={<ChargeBbs />} />
