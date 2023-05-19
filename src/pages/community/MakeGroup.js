@@ -14,8 +14,6 @@ import MapContainer from '../../components/MapContainer';
 
 
 
-
-
 const BtnOne = styled.button`
     border-radius: 15px;
     width: 150px;
