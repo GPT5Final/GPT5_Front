@@ -67,29 +67,38 @@ function Header() {
             </NavDropdown>
 
             <NavDropdown
-              title="INFORMATION"
+              title="STORE"
               id="INFORMATION-dropdown"
               style={{ marginLeft: "5vw" }}
-            >
-              <NavDropdown.Item as={Link} to="/information">
-                INFORMATION
-              </NavDropdown.Item>
+            >              
               <NavDropdown.Item as={Link} to="/charge">
-                Charge
+                CHARGE
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/payCoin">
-                Pay Coin
+                PAYCOIN
               </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link
-              as={Link}
-              to="/community/Home"
-              className="nav-link"
-              style={{ marginLeft: "5vw" }}
-            >
-              MAKEGROUP
-            </Nav.Link>
+            <NavDropdown title="GROUP" id="community-dropdown" style={{ marginLeft: "5vw" }}>
+              <NavDropdown.Item as={Link} to="/community/Home">
+                홈
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/community/ExerciseTalk">
+                운동이야기
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/community/PartnerMentor">
+                인증멘토 찾기
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/community/MentorMentee">
+                멘토&멘티 찾기
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/community/MakeGroup">
+                그룹 만들기
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/community/MyGroup">
+                나의 그룹
+              </NavDropdown.Item>
+            </NavDropdown>
             <Nav.Link
               as={Link}
               to="/guide"

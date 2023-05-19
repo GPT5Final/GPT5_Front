@@ -49,6 +49,10 @@ const CoinClickBox = styled.div`
   align-items: center;
   color: black;
 `;
+const Wrapper = styled.div`
+  max-width: 1020px;
+  margin: 0 auto;
+`;
 
 function Charge() {
   let history = useNavigate();
@@ -199,15 +203,16 @@ function Charge() {
   return (
     <>
       <Header />
+      <Wrapper>
       <div style={{ marginTop: "3vh", textAlign: "center" }}>
         <h1>Charge</h1>
       </div>
       <div style={{ marginTop: "3vh" }}>
         <Carousel activeIndex={index} onSelect={handleSelect}>
           <Carousel.Item>
-            <img
+            <img style={{ maxHeight: "500px" }}
               className="d-block w-100"
-              src="./banner.png"
+              src="./banner0.png"
               alt="First slide"
             />
             <Carousel.Caption>
@@ -216,9 +221,9 @@ function Charge() {
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img
+            <img style={{ maxHeight: "500px" }}
               className="d-block w-100"
-              src="./banner.png"
+              src="./banner1.png"
               alt="Second slide"
             />
 
@@ -228,9 +233,9 @@ function Charge() {
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img
+            <img style={{ maxHeight: "500px" }}
               className="d-block w-100"
-              src="./banner.png"
+              src="./banner2.png"
               alt="Third slide"
             />
 
@@ -321,6 +326,7 @@ function Charge() {
           </Row>
         </Container>
       </div>
+      </Wrapper>
       <Footer marginTop={"0px"} />
     </>
   );

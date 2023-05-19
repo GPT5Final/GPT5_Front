@@ -11,7 +11,9 @@ import MyGroup from "./pages/community/MyGroup";
 import PartnerMentor from "./pages/community/PartnerMentor";
 import MentorMentee from "./pages/community/MentorMentee";
 import ExerciseTalk from "./pages/community/ExerciseTalk";
+import ExerciseTalkWrite from "./pages/community/ExerciseTalkWrite";
 import MakeGroup from "./pages/community/MakeGroup";
+import CommunityDetail from "./pages/community/CommunityDetail";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -23,6 +25,8 @@ import Mypageleave from "./pages/mypage/Mypageleave";
 import Mypagereference from "./pages/mypage/Mypagereference";
 
 import Guide from "./pages/Guide";
+import GuideDetail from "./pages/bbs/GuideDetail";
+import GuideWrite from "./pages/bbs/GuideWrite";
 import Diet from "./pages/Diet";
 import Exercise from "./pages/Exercise";
 import Information from "./pages/Information";
@@ -69,7 +73,12 @@ const Router = () => {
         <Route path="/community/PartnerMentor" element={<PartnerMentor />} />
         <Route path="/community/MentorMentee" element={<MentorMentee />} />
         <Route path="/community/ExerciseTalk" element={<ExerciseTalk />} />
+        <Route
+          path="/community/ExerciseTalkWrite"
+          element={<ExerciseTalkWrite />}
+        />
         <Route path="/community/MakeGroup" element={<MakeGroup />} />
+        <Route path="/CommunityDetail/:id" element={<CommunityDetail />} />
         <Route path="/stretching" element={<Stretching />} />
         <Route path="/information" element={<Information />} />
         <Route path="/ChargeBbs" element={<ChargeBbs />} />
@@ -81,8 +90,11 @@ const Router = () => {
         <Route path="/trainer/:id" element={<TrainersDetail />} />
         <Route path="/guide" element={<Guide />} />
         <Route path="/exercise" element={<Exercise />} />
-        <Route path="/diet" element={<Diet />} />
+        <Route path="/Diet" element={<Diet />} />
+        <Route path="/Diet/:choice/:search" element={<Diet />} />
         <Route path="/stretching" element={<Stretching />} />
+        <Route path="/GuideWrite" element={<GuideWrite />} />
+        <Route path="/GuideDetail/:seq" exact element={<GuideDetail />} />
       </Routes>
     </BrowserRouter>
   );
